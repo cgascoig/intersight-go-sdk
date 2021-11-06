@@ -1,0 +1,9 @@
+{
+    "isGoSubmodule": true,
+    "withGoCodegenComment": true,
+    "hideGenerationTimestamp": true,
+    "structPrefix": false,
+    "disallowAdditionalPropertiesIfNotPresent": false,
+    "useOneOfDiscriminatorLookup": true,
+    "packageName": "intersight"
+}
