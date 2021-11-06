@@ -14,7 +14,6 @@ package intersight
 import (
 	"encoding/json"
 	"fmt"
-	"time"
 )
 
 // TelemetryDruidGranularity - The granularity field determines how data gets bucketed across the time dimension, or how it gets aggregated by hour, day, minute, etc. It can be specified either as a string for simple granularities or as an object for arbitrary granularities. See [Granularities](https://druid.apache.org/docs/latest/querying/granularities.html).
