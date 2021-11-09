@@ -69,6 +69,16 @@ def main():
     os.chdir("..")
     logging.info(f"Working directory: {os.getcwd()}")
 
+    try:
+        logging.info("Running git checkout main")
+        subprocess.run(["git", "checkout", "main"], check=True)
+        logging.info("Running git pull")
+        subprocess.run(["git", "pull"], check=True)
+    except:
+        logging.error("Error occurred during git setup operations")
+        notify.send_notification("Update intersight-go-sdk - error during git setup operations")
+        exit(1)
+
     local_version = get_local_version()
     logging.info(f"Current local version: {local_version}")
 
