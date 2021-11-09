@@ -107,7 +107,7 @@ def main():
         logging.info("Running git commit ...")
         res = subprocess.run(["git", "commit", "-m", f"Update to version {version}"], check=True)
         logging.info("Running git tag ...")
-        res = subprocess.run(["git", "tag", f"v{version}"], check=True)
+        res = subprocess.run(["git", "tag", f"intersight/v{version}"], check=True)
         logging.info("Running git push ...")
         res = subprocess.run(["git", "push", "origin"], check=True)
         logging.info("Running git push --tags...")
