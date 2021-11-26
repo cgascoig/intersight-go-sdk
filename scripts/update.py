@@ -106,7 +106,7 @@ def main():
     download_spec(version, "spec/intersight-openapi-v3.json")
     logging.info("Download successful")
 
-    if os.getenv("TEST") is None:
+    if os.getenv("SKIP_MAKE") is None:
         logging.info("Running 'make all'")
         res = subprocess.run(["make", "all"], env={**os.environ, "OPENAPI_VERSION": version})
         if res.returncode != 0:
