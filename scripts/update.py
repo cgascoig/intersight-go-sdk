@@ -106,13 +106,14 @@ def main():
     download_spec(version, "spec/intersight-openapi-v3.json")
     logging.info("Download successful")
 
-    logging.info("Running 'make all'")
-    res = subprocess.run(["make", "all"], env={**os.environ, "OPENAPI_VERSION": version})
-    if res.returncode != 0:
-        logging.error("Error occurred running make, reverting spec file and package")
-        notify.send_notification("Update intersight-go-sdk - error during make")
-        subprocess.run(["git", "checkout", "--", "spec/", "intersight/"])
-        exit(1)
+    if os.getenv("TEST") is None:
+        logging.info("Running 'make all'")
+        res = subprocess.run(["make", "all"], env={**os.environ, "OPENAPI_VERSION": version})
+        if res.returncode != 0:
+            logging.error("Error occurred running make, reverting spec file and package")
+            notify.send_notification("Update intersight-go-sdk - error during make")
+            subprocess.run(["git", "checkout", "--", "spec/", "intersight/"])
+            exit(1)
     
     logging.info("make ran successfully")
     notify.send_notification("Update intersight-go-sdk - make ran successfully")
