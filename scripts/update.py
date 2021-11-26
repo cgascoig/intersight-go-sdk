@@ -86,9 +86,11 @@ def main():
     version = get_server_version()
     logging.info(f"Version found: {version}")
 
+    tag_version = version
+
     if os.getenv("TEST") is not None:
         rand = random.randint(0,999999)
-        version=f"{version}-test{rand}"
+        tag_version=f"{version}-test{rand}"
         branch=f"test{rand}"
         logging.info(f"Overridding version to {version} to force test update and using branch {branch}")
         res = subprocess.run(["git", "checkout", "-b", branch], check=True)
@@ -125,7 +127,7 @@ def main():
         logging.info("Running git commit ...")
         res = subprocess.run(["git", "commit", "-m", f"Update to version {version}"], check=True)
         logging.info("Running git tag ...")
-        res = subprocess.run(["git", "tag", f"intersight/v{version}"], check=True)
+        res = subprocess.run(["git", "tag", f"intersight/v{tag_version}"], check=True)
         logging.info("Running git push ...")
         res = subprocess.run(["git", "push", "origin"], check=True)
         logging.info("Running git push --tags...")
