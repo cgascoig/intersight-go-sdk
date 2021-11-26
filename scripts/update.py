@@ -114,6 +114,8 @@ def main():
             notify.send_notification("Update intersight-go-sdk - error during make")
             subprocess.run(["git", "checkout", "--", "spec/", "intersight/"])
             exit(1)
+    else:
+        subprocess.run(["sh", "-c", f"echo {tag_version} > OPENAPI_VERSION"])
     
     logging.info("make ran successfully")
     notify.send_notification("Update intersight-go-sdk - make ran successfully")
