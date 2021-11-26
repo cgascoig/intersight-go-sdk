@@ -130,9 +130,9 @@ def main():
         logging.info("Running git tag ...")
         res = subprocess.run(["git", "tag", f"intersight/v{tag_version}"], check=True)
         logging.info("Running git push ...")
-        res = subprocess.run(["git", "push", "origin"], check=True)
+        res = subprocess.run(["git", "push", "origin", branch], check=True)
         logging.info("Running git push --tags...")
-        res = subprocess.run(["git", "push", "origin", "--tags"], check=True)
+        res = subprocess.run(["git", "push", "origin", branch, "--tags"], check=True)
     except:
         logging.error("Error occurred during git operations")
         notify.send_notification("Update intersight-go-sdk - error during git operations")
