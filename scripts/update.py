@@ -95,7 +95,7 @@ def main():
         logging.info(f"Overridding version to {version} to force test update and using branch {branch}")
         res = subprocess.run(["git", "checkout", "-b", branch], check=True)
 
-    if local_version == version:
+    if local_version == tag_version:
         logging.info(f"No new version, exiting")
         notify.send_notification("Update intersight-go-sdk - no new version found")
         exit(0)
