@@ -85,6 +85,13 @@ def main():
     version = get_server_version()
     logging.info(f"Version found: {version}")
 
+    if os.getenv("TEST") is not None:
+        rand = random.randint(0,999999)
+        version=f"{version}-test{rand}"
+        branch=f"test{rand}"
+        logging.info(f"Overridding version to {version} to force test update and using branch {branch}")
+        res = subprocess.run(["git", "checkout", "-b", branch], check=True)
+
     if local_version == version:
         logging.info(f"No new version, exiting")
         notify.send_notification("Update intersight-go-sdk - no new version found")
