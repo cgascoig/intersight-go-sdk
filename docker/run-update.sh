@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export PATH="${PATH}:$(go env GOPATH)/bin"
+
 git config --global user.email "cgascoig@cisco.com"
 git config --global user.name "Chris Gascoigne"
 
