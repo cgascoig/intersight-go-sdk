@@ -133,9 +133,10 @@ def main():
         res = subprocess.run(["git", "push", "origin", branch], check=True)
         logging.info("Running git push --tags...")
         res = subprocess.run(["git", "push", "origin", branch, "--tags"], check=True)
-    except:
-        logging.error("Error occurred during git operations")
-        notify.send_notification("Update intersight-go-sdk - error during git operations")
+    except subprocess.CalledProcessError as e:
+        msg = f"Error occurred during git operations. Output: '{e.output}', stdout: '{e.stdout}', stderr: '{e.stderr}'"
+        logging.error(msg)
+        notify.send_notification(f"Update intersight-go-sdk - {msg}")
         exit(1)
 
     logging.info("Git operations completed successfully")
