@@ -87,6 +87,7 @@ def main():
     logging.info(f"Version found: {version}")
 
     tag_version = version
+    branch="main"
 
     if os.getenv("TEST") is not None:
         rand = random.randint(0,999999)
