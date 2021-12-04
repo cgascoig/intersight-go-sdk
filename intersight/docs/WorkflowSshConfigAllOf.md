@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **IsPrivateKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;privateKey&#39; property has been set. | [optional] [readonly] [default to false]
 **Passphrase** | Pointer to **string** | Optional passphrase if provided while creating the private key. | [optional] 
-**Password** | Pointer to **string** | Password to use in the SSH connection credentials (If empty then private key will be used). | [optional] 
-**PrivateKey** | Pointer to **string** | PEM encoded private key to use in the SSH connection credentials (Optional if password is given). | [optional] 
-**Target** | Pointer to **string** | The remote server to connect to. IPv4 address represented in dot decimal notation. | [optional] 
+**Password** | Pointer to **string** | Password to use in the SSH connection credentials (If empty, private key will be used). | [optional] 
+**PrivateKey** | Pointer to **string** | PEM encoded private key to be used in the SSH connection credentials (Optional if password is given). | [optional] 
+**Target** | Pointer to **string** | The remote server to connect to. IPv4 address represented in dot decimal notation or hostname can be specified. | [optional] 
 **User** | Pointer to **string** | Username for the remote SSH connection. | [optional] 
 
 ## Methods

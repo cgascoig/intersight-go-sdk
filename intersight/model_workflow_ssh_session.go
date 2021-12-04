@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4870
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -23,13 +23,19 @@ type WorkflowSshSession struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                `json:"ObjectType"`
+	ObjectType string `json:"ObjectType"`
+	// Flag to allow capturing entire command response as batch API output.
+	CaptureCompleteResponse *string `json:"CaptureCompleteResponse,omitempty"`
+	// Optional array of integer values to specify the expected exit codes of a SSH command execution. SSH command execution is marked success upon receiving any of the expected exit code from command execution. If not set, success exit code of 0 is expected from command execution.
+	ExpectedExitCodes    interface{}           `json:"ExpectedExitCodes,omitempty"`
 	FileTransferToRemote *WorkflowFileTransfer `json:"FileTransferToRemote,omitempty"`
-	// The type of SSH message to send to the remote server. * `ExecuteCommand` - Execute a SSH command on the remote server. * `NewSession` - Open a new SSH connection to the remote server. * `FileTransfer` - Transfer a file from Intersight connected device to the remote server. * `CloseSession` - Close the SSH connection to the remote server.
+	// The type of SSH message to be sent to the remote server. * `ExecuteCommand` - Execute a SSH command on the remote server. * `NewSession` - Open a new SSH connection to the remote server. * `FileTransfer` - Transfer a file from Intersight connected device to the remote server. * `CloseSession` - Close the SSH connection to the remote server.
 	MessageType *string `json:"MessageType,omitempty"`
 	// SSH command to execute on the remote server.
-	SshCommand           interface{}        `json:"SshCommand,omitempty"`
-	SshConfiguration     *WorkflowSshConfig `json:"SshConfiguration,omitempty"`
+	SshCommand       interface{}        `json:"SshCommand,omitempty"`
+	SshConfiguration *WorkflowSshConfig `json:"SshConfiguration,omitempty"`
+	// SSH operation timeout value in seconds. The provided string value should be able to convert to respective integer value.
+	SshOpTimeout         *string `json:"SshOpTimeout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -108,6 +114,71 @@ func (o *WorkflowSshSession) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *WorkflowSshSession) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetCaptureCompleteResponse returns the CaptureCompleteResponse field value if set, zero value otherwise.
+func (o *WorkflowSshSession) GetCaptureCompleteResponse() string {
+	if o == nil || o.CaptureCompleteResponse == nil {
+		var ret string
+		return ret
+	}
+	return *o.CaptureCompleteResponse
+}
+
+// GetCaptureCompleteResponseOk returns a tuple with the CaptureCompleteResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowSshSession) GetCaptureCompleteResponseOk() (*string, bool) {
+	if o == nil || o.CaptureCompleteResponse == nil {
+		return nil, false
+	}
+	return o.CaptureCompleteResponse, true
+}
+
+// HasCaptureCompleteResponse returns a boolean if a field has been set.
+func (o *WorkflowSshSession) HasCaptureCompleteResponse() bool {
+	if o != nil && o.CaptureCompleteResponse != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCaptureCompleteResponse gets a reference to the given string and assigns it to the CaptureCompleteResponse field.
+func (o *WorkflowSshSession) SetCaptureCompleteResponse(v string) {
+	o.CaptureCompleteResponse = &v
+}
+
+// GetExpectedExitCodes returns the ExpectedExitCodes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowSshSession) GetExpectedExitCodes() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.ExpectedExitCodes
+}
+
+// GetExpectedExitCodesOk returns a tuple with the ExpectedExitCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowSshSession) GetExpectedExitCodesOk() (*interface{}, bool) {
+	if o == nil || o.ExpectedExitCodes == nil {
+		return nil, false
+	}
+	return &o.ExpectedExitCodes, true
+}
+
+// HasExpectedExitCodes returns a boolean if a field has been set.
+func (o *WorkflowSshSession) HasExpectedExitCodes() bool {
+	if o != nil && o.ExpectedExitCodes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpectedExitCodes gets a reference to the given interface{} and assigns it to the ExpectedExitCodes field.
+func (o *WorkflowSshSession) SetExpectedExitCodes(v interface{}) {
+	o.ExpectedExitCodes = v
 }
 
 // GetFileTransferToRemote returns the FileTransferToRemote field value if set, zero value otherwise.
@@ -239,6 +310,38 @@ func (o *WorkflowSshSession) SetSshConfiguration(v WorkflowSshConfig) {
 	o.SshConfiguration = &v
 }
 
+// GetSshOpTimeout returns the SshOpTimeout field value if set, zero value otherwise.
+func (o *WorkflowSshSession) GetSshOpTimeout() string {
+	if o == nil || o.SshOpTimeout == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshOpTimeout
+}
+
+// GetSshOpTimeoutOk returns a tuple with the SshOpTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowSshSession) GetSshOpTimeoutOk() (*string, bool) {
+	if o == nil || o.SshOpTimeout == nil {
+		return nil, false
+	}
+	return o.SshOpTimeout, true
+}
+
+// HasSshOpTimeout returns a boolean if a field has been set.
+func (o *WorkflowSshSession) HasSshOpTimeout() bool {
+	if o != nil && o.SshOpTimeout != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshOpTimeout gets a reference to the given string and assigns it to the SshOpTimeout field.
+func (o *WorkflowSshSession) SetSshOpTimeout(v string) {
+	o.SshOpTimeout = &v
+}
+
 func (o WorkflowSshSession) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowApi, errWorkflowApi := json.Marshal(o.WorkflowApi)
@@ -255,6 +358,12 @@ func (o WorkflowSshSession) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.CaptureCompleteResponse != nil {
+		toSerialize["CaptureCompleteResponse"] = o.CaptureCompleteResponse
+	}
+	if o.ExpectedExitCodes != nil {
+		toSerialize["ExpectedExitCodes"] = o.ExpectedExitCodes
+	}
 	if o.FileTransferToRemote != nil {
 		toSerialize["FileTransferToRemote"] = o.FileTransferToRemote
 	}
@@ -266,6 +375,9 @@ func (o WorkflowSshSession) MarshalJSON() ([]byte, error) {
 	}
 	if o.SshConfiguration != nil {
 		toSerialize["SshConfiguration"] = o.SshConfiguration
+	}
+	if o.SshOpTimeout != nil {
+		toSerialize["SshOpTimeout"] = o.SshOpTimeout
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -280,13 +392,19 @@ func (o *WorkflowSshSession) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType           string                `json:"ObjectType"`
+		ObjectType string `json:"ObjectType"`
+		// Flag to allow capturing entire command response as batch API output.
+		CaptureCompleteResponse *string `json:"CaptureCompleteResponse,omitempty"`
+		// Optional array of integer values to specify the expected exit codes of a SSH command execution. SSH command execution is marked success upon receiving any of the expected exit code from command execution. If not set, success exit code of 0 is expected from command execution.
+		ExpectedExitCodes    interface{}           `json:"ExpectedExitCodes,omitempty"`
 		FileTransferToRemote *WorkflowFileTransfer `json:"FileTransferToRemote,omitempty"`
-		// The type of SSH message to send to the remote server. * `ExecuteCommand` - Execute a SSH command on the remote server. * `NewSession` - Open a new SSH connection to the remote server. * `FileTransfer` - Transfer a file from Intersight connected device to the remote server. * `CloseSession` - Close the SSH connection to the remote server.
+		// The type of SSH message to be sent to the remote server. * `ExecuteCommand` - Execute a SSH command on the remote server. * `NewSession` - Open a new SSH connection to the remote server. * `FileTransfer` - Transfer a file from Intersight connected device to the remote server. * `CloseSession` - Close the SSH connection to the remote server.
 		MessageType *string `json:"MessageType,omitempty"`
 		// SSH command to execute on the remote server.
 		SshCommand       interface{}        `json:"SshCommand,omitempty"`
 		SshConfiguration *WorkflowSshConfig `json:"SshConfiguration,omitempty"`
+		// SSH operation timeout value in seconds. The provided string value should be able to convert to respective integer value.
+		SshOpTimeout *string `json:"SshOpTimeout,omitempty"`
 	}
 
 	varWorkflowSshSessionWithoutEmbeddedStruct := WorkflowSshSessionWithoutEmbeddedStruct{}
@@ -296,10 +414,13 @@ func (o *WorkflowSshSession) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowSshSession := _WorkflowSshSession{}
 		varWorkflowSshSession.ClassId = varWorkflowSshSessionWithoutEmbeddedStruct.ClassId
 		varWorkflowSshSession.ObjectType = varWorkflowSshSessionWithoutEmbeddedStruct.ObjectType
+		varWorkflowSshSession.CaptureCompleteResponse = varWorkflowSshSessionWithoutEmbeddedStruct.CaptureCompleteResponse
+		varWorkflowSshSession.ExpectedExitCodes = varWorkflowSshSessionWithoutEmbeddedStruct.ExpectedExitCodes
 		varWorkflowSshSession.FileTransferToRemote = varWorkflowSshSessionWithoutEmbeddedStruct.FileTransferToRemote
 		varWorkflowSshSession.MessageType = varWorkflowSshSessionWithoutEmbeddedStruct.MessageType
 		varWorkflowSshSession.SshCommand = varWorkflowSshSessionWithoutEmbeddedStruct.SshCommand
 		varWorkflowSshSession.SshConfiguration = varWorkflowSshSessionWithoutEmbeddedStruct.SshConfiguration
+		varWorkflowSshSession.SshOpTimeout = varWorkflowSshSessionWithoutEmbeddedStruct.SshOpTimeout
 		*o = WorkflowSshSession(varWorkflowSshSession)
 	} else {
 		return err
@@ -319,10 +440,13 @@ func (o *WorkflowSshSession) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CaptureCompleteResponse")
+		delete(additionalProperties, "ExpectedExitCodes")
 		delete(additionalProperties, "FileTransferToRemote")
 		delete(additionalProperties, "MessageType")
 		delete(additionalProperties, "SshCommand")
 		delete(additionalProperties, "SshConfiguration")
+		delete(additionalProperties, "SshOpTimeout")
 
 		// remove fields from embedded structs
 		reflectWorkflowApi := reflect.ValueOf(o.WorkflowApi)

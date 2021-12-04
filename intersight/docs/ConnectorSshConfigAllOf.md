@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Passphrase** | Pointer to **string** | Optional passphrase if provided while creating the private key. | [optional] 
 **Password** | Pointer to **string** | Password to use in the connection credentials (If empty the private key will be used). | [optional] 
 **Pkey** | Pointer to **string** | The private key to use in the connection credentials (Optional if password is given). | [optional] 
+**PkeyString** | Pointer to **string** | The private key to use in the connection credentials in string format. | [optional] 
 **Target** | Pointer to **string** | The remote server to connect to. | [optional] 
 **User** | Pointer to **string** | Username for the remote connection. | [optional] 
 
@@ -171,6 +172,31 @@ SetPkey sets Pkey field to given value.
 `func (o *ConnectorSshConfigAllOf) HasPkey() bool`
 
 HasPkey returns a boolean if a field has been set.
+
+### GetPkeyString
+
+`func (o *ConnectorSshConfigAllOf) GetPkeyString() string`
+
+GetPkeyString returns the PkeyString field if non-nil, zero value otherwise.
+
+### GetPkeyStringOk
+
+`func (o *ConnectorSshConfigAllOf) GetPkeyStringOk() (*string, bool)`
+
+GetPkeyStringOk returns a tuple with the PkeyString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPkeyString
+
+`func (o *ConnectorSshConfigAllOf) SetPkeyString(v string)`
+
+SetPkeyString sets PkeyString field to given value.
+
+### HasPkeyString
+
+`func (o *ConnectorSshConfigAllOf) HasPkeyString() bool`
+
+HasPkeyString returns a boolean if a field has been set.
 
 ### GetTarget
 
