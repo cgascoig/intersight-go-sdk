@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from webexteamssdk import WebexTeamsAPI
 import os
 import sys

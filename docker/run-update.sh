@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -24,6 +24,12 @@ git clone "https://pat:${GITHUB_PAT}@github.com/cgascoig/intersight-go-example.g
 cd intersight-go-example
 go get "github.com/cgascoig/intersight-go-sdk/intersight@v${VER}"
 make
-git commit -a -m "Update SDK to v${VER}"
-git push origin main
-(cd ../intersight-go-sdk/scripts/; pipenv run ./notify.py "Example project successfully updated to v${VER}")
+if [[ -n $(git status --porcelain) ]]
+then 
+    echo "repo is dirty"
+    git commit -a -m "Update SDK to v${VER}"
+    git push origin main
+    (cd ../intersight-go-sdk/scripts/; pipenv run ./notify.py "Example project successfully updated to v${VER}")
+else 
+    (cd ../intersight-go-sdk/scripts/; pipenv run ./notify.py "Example project unchanged at v${VER}")
+fi
