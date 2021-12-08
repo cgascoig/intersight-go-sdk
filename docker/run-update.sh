@@ -17,7 +17,7 @@ git checkout "${BRANCH}"
 pipenv sync
 pipenv run ./update.py
 
-VER=$(cat OPENAPI_VERSION)
+VER=$(cat ${BASE_DIR}/intersight-go-sdk/OPENAPI_VERSION)
 
 cd "${BASE_DIR}"
 git clone "https://pat:${GITHUB_PAT}@github.com/cgascoig/intersight-go-example.git"
