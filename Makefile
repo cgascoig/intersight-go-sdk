@@ -23,6 +23,7 @@ all: intersight/README.md
 
 clean:
 > rm -Rf intersight
+.PHONY: clean
 
 intersight/README.md: spec/intersight-openapi-v3.json openapi-generator-config.json Makefile
 > mkdir -p $(@D)
