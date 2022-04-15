@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -2342,6 +2342,184 @@ func (a *FabricApiService) CreateFabricFlowControlPolicyExecute(r ApiCreateFabri
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateFabricLanPinGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *FabricApiService
+	fabricLanPinGroup *FabricLanPinGroup
+	ifMatch           *string
+	ifNoneMatch       *string
+}
+
+// The &#39;fabric.LanPinGroup&#39; resource to create.
+func (r ApiCreateFabricLanPinGroupRequest) FabricLanPinGroup(fabricLanPinGroup FabricLanPinGroup) ApiCreateFabricLanPinGroupRequest {
+	r.fabricLanPinGroup = &fabricLanPinGroup
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateFabricLanPinGroupRequest) IfMatch(ifMatch string) ApiCreateFabricLanPinGroupRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateFabricLanPinGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFabricLanPinGroupRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateFabricLanPinGroupRequest) Execute() (FabricLanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.CreateFabricLanPinGroupExecute(r)
+}
+
+/*
+CreateFabricLanPinGroup Create a 'fabric.LanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFabricLanPinGroupRequest
+*/
+func (a *FabricApiService) CreateFabricLanPinGroup(ctx _context.Context) ApiCreateFabricLanPinGroupRequest {
+	return ApiCreateFabricLanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FabricLanPinGroup
+func (a *FabricApiService) CreateFabricLanPinGroupExecute(r ApiCreateFabricLanPinGroupRequest) (FabricLanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricLanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricLanPinGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/LanPinGroups"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricLanPinGroup == nil {
+		return localVarReturnValue, nil, reportError("fabricLanPinGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricLanPinGroup
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateFabricLinkAggregationPolicyRequest struct {
 	ctx                         _context.Context
 	ApiService                  *FabricApiService
@@ -3504,6 +3682,184 @@ func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPo
 	}
 	// body params
 	localVarPostBody = r.fabricPortPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateFabricSanPinGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *FabricApiService
+	fabricSanPinGroup *FabricSanPinGroup
+	ifMatch           *string
+	ifNoneMatch       *string
+}
+
+// The &#39;fabric.SanPinGroup&#39; resource to create.
+func (r ApiCreateFabricSanPinGroupRequest) FabricSanPinGroup(fabricSanPinGroup FabricSanPinGroup) ApiCreateFabricSanPinGroupRequest {
+	r.fabricSanPinGroup = &fabricSanPinGroup
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateFabricSanPinGroupRequest) IfMatch(ifMatch string) ApiCreateFabricSanPinGroupRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateFabricSanPinGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFabricSanPinGroupRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateFabricSanPinGroupRequest) Execute() (FabricSanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.CreateFabricSanPinGroupExecute(r)
+}
+
+/*
+CreateFabricSanPinGroup Create a 'fabric.SanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateFabricSanPinGroupRequest
+*/
+func (a *FabricApiService) CreateFabricSanPinGroup(ctx _context.Context) ApiCreateFabricSanPinGroupRequest {
+	return ApiCreateFabricSanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FabricSanPinGroup
+func (a *FabricApiService) CreateFabricSanPinGroupExecute(r ApiCreateFabricSanPinGroupRequest) (FabricSanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricSanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricSanPinGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/SanPinGroups"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricSanPinGroup == nil {
+		return localVarReturnValue, nil, reportError("fabricSanPinGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricSanPinGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -6858,6 +7214,145 @@ func (a *FabricApiService) DeleteFabricFlowControlPolicyExecute(r ApiDeleteFabri
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeleteFabricLanPinGroupRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiDeleteFabricLanPinGroupRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteFabricLanPinGroupExecute(r)
+}
+
+/*
+DeleteFabricLanPinGroup Delete a 'fabric.LanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFabricLanPinGroupRequest
+*/
+func (a *FabricApiService) DeleteFabricLanPinGroup(ctx _context.Context, moid string) ApiDeleteFabricLanPinGroupRequest {
+	return ApiDeleteFabricLanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *FabricApiService) DeleteFabricLanPinGroupExecute(r ApiDeleteFabricLanPinGroupRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricLanPinGroup")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/LanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiDeleteFabricLinkAggregationPolicyRequest struct {
 	ctx        _context.Context
 	ApiService *FabricApiService
@@ -7733,6 +8228,145 @@ func (a *FabricApiService) DeleteFabricPortPolicyExecute(r ApiDeleteFabricPortPo
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteFabricSanPinGroupRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiDeleteFabricSanPinGroupRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteFabricSanPinGroupExecute(r)
+}
+
+/*
+DeleteFabricSanPinGroup Delete a 'fabric.SanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteFabricSanPinGroupRequest
+*/
+func (a *FabricApiService) DeleteFabricSanPinGroup(ctx _context.Context, moid string) ApiDeleteFabricSanPinGroupRequest {
+	return ApiDeleteFabricSanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *FabricApiService) DeleteFabricSanPinGroupExecute(r ApiDeleteFabricSanPinGroupRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricSanPinGroup")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/SanPinGroups/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -11668,6 +12302,412 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoidExecute(r ApiGe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest) Execute() (FabricEthNetworkControlPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricEthNetworkControlPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetFabricEthNetworkControlPolicyInventoryByMoid Read a 'fabric.EthNetworkControlPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest
+*/
+func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest {
+	return ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricEthNetworkControlPolicyInventory
+func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryByMoidExecute(r ApiGetFabricEthNetworkControlPolicyInventoryByMoidRequest) (FabricEthNetworkControlPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricEthNetworkControlPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkControlPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFabricEthNetworkControlPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *FabricApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Filter(filter string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Orderby(orderby string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Top(top int32) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Skip(skip int32) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Select_(select_ string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Expand(expand string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Apply(apply string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Count(count bool) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) At(at string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Tags(tags string) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) Execute() (FabricEthNetworkControlPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricEthNetworkControlPolicyInventoryListExecute(r)
+}
+
+/*
+GetFabricEthNetworkControlPolicyInventoryList Read a 'fabric.EthNetworkControlPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFabricEthNetworkControlPolicyInventoryListRequest
+*/
+func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryList(ctx _context.Context) ApiGetFabricEthNetworkControlPolicyInventoryListRequest {
+	return ApiGetFabricEthNetworkControlPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FabricEthNetworkControlPolicyInventoryResponse
+func (a *FabricApiService) GetFabricEthNetworkControlPolicyInventoryListExecute(r ApiGetFabricEthNetworkControlPolicyInventoryListRequest) (FabricEthNetworkControlPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricEthNetworkControlPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkControlPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetFabricEthNetworkControlPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *FabricApiService
@@ -11973,6 +13013,412 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoidExecute(r ApiGetF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest) Execute() (FabricEthNetworkGroupPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricEthNetworkGroupPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetFabricEthNetworkGroupPolicyInventoryByMoid Read a 'fabric.EthNetworkGroupPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest
+*/
+func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest {
+	return ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricEthNetworkGroupPolicyInventory
+func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryByMoidExecute(r ApiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest) (FabricEthNetworkGroupPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricEthNetworkGroupPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkGroupPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFabricEthNetworkGroupPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *FabricApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Filter(filter string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Orderby(orderby string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Top(top int32) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Skip(skip int32) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Select_(select_ string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Expand(expand string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Apply(apply string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Count(count bool) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) At(at string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Tags(tags string) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) Execute() (FabricEthNetworkGroupPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricEthNetworkGroupPolicyInventoryListExecute(r)
+}
+
+/*
+GetFabricEthNetworkGroupPolicyInventoryList Read a 'fabric.EthNetworkGroupPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFabricEthNetworkGroupPolicyInventoryListRequest
+*/
+func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryList(ctx _context.Context) ApiGetFabricEthNetworkGroupPolicyInventoryListRequest {
+	return ApiGetFabricEthNetworkGroupPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FabricEthNetworkGroupPolicyInventoryResponse
+func (a *FabricApiService) GetFabricEthNetworkGroupPolicyInventoryListExecute(r ApiGetFabricEthNetworkGroupPolicyInventoryListRequest) (FabricEthNetworkGroupPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricEthNetworkGroupPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkGroupPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -15578,6 +17024,412 @@ func (a *FabricApiService) GetFabricFlowControlPolicyListExecute(r ApiGetFabricF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetFabricLanPinGroupByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiGetFabricLanPinGroupByMoidRequest) Execute() (FabricLanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricLanPinGroupByMoidExecute(r)
+}
+
+/*
+GetFabricLanPinGroupByMoid Read a 'fabric.LanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFabricLanPinGroupByMoidRequest
+*/
+func (a *FabricApiService) GetFabricLanPinGroupByMoid(ctx _context.Context, moid string) ApiGetFabricLanPinGroupByMoidRequest {
+	return ApiGetFabricLanPinGroupByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricLanPinGroup
+func (a *FabricApiService) GetFabricLanPinGroupByMoidExecute(r ApiGetFabricLanPinGroupByMoidRequest) (FabricLanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricLanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricLanPinGroupByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/LanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFabricLanPinGroupListRequest struct {
+	ctx         _context.Context
+	ApiService  *FabricApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetFabricLanPinGroupListRequest) Filter(filter string) ApiGetFabricLanPinGroupListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetFabricLanPinGroupListRequest) Orderby(orderby string) ApiGetFabricLanPinGroupListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetFabricLanPinGroupListRequest) Top(top int32) ApiGetFabricLanPinGroupListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetFabricLanPinGroupListRequest) Skip(skip int32) ApiGetFabricLanPinGroupListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFabricLanPinGroupListRequest) Select_(select_ string) ApiGetFabricLanPinGroupListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFabricLanPinGroupListRequest) Expand(expand string) ApiGetFabricLanPinGroupListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetFabricLanPinGroupListRequest) Apply(apply string) ApiGetFabricLanPinGroupListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetFabricLanPinGroupListRequest) Count(count bool) ApiGetFabricLanPinGroupListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetFabricLanPinGroupListRequest) Inlinecount(inlinecount string) ApiGetFabricLanPinGroupListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFabricLanPinGroupListRequest) At(at string) ApiGetFabricLanPinGroupListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetFabricLanPinGroupListRequest) Tags(tags string) ApiGetFabricLanPinGroupListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFabricLanPinGroupListRequest) Execute() (FabricLanPinGroupResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricLanPinGroupListExecute(r)
+}
+
+/*
+GetFabricLanPinGroupList Read a 'fabric.LanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFabricLanPinGroupListRequest
+*/
+func (a *FabricApiService) GetFabricLanPinGroupList(ctx _context.Context) ApiGetFabricLanPinGroupListRequest {
+	return ApiGetFabricLanPinGroupListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FabricLanPinGroupResponse
+func (a *FabricApiService) GetFabricLanPinGroupListExecute(r ApiGetFabricLanPinGroupListRequest) (FabricLanPinGroupResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricLanPinGroupResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricLanPinGroupList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/LanPinGroups"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetFabricLinkAggregationPolicyByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *FabricApiService
@@ -18687,6 +20539,412 @@ func (a *FabricApiService) GetFabricPortPolicyListExecute(r ApiGetFabricPortPoli
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFabricSanPinGroupByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiGetFabricSanPinGroupByMoidRequest) Execute() (FabricSanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricSanPinGroupByMoidExecute(r)
+}
+
+/*
+GetFabricSanPinGroupByMoid Read a 'fabric.SanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetFabricSanPinGroupByMoidRequest
+*/
+func (a *FabricApiService) GetFabricSanPinGroupByMoid(ctx _context.Context, moid string) ApiGetFabricSanPinGroupByMoidRequest {
+	return ApiGetFabricSanPinGroupByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricSanPinGroup
+func (a *FabricApiService) GetFabricSanPinGroupByMoidExecute(r ApiGetFabricSanPinGroupByMoidRequest) (FabricSanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricSanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSanPinGroupByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/SanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFabricSanPinGroupListRequest struct {
+	ctx         _context.Context
+	ApiService  *FabricApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetFabricSanPinGroupListRequest) Filter(filter string) ApiGetFabricSanPinGroupListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetFabricSanPinGroupListRequest) Orderby(orderby string) ApiGetFabricSanPinGroupListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetFabricSanPinGroupListRequest) Top(top int32) ApiGetFabricSanPinGroupListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetFabricSanPinGroupListRequest) Skip(skip int32) ApiGetFabricSanPinGroupListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetFabricSanPinGroupListRequest) Select_(select_ string) ApiGetFabricSanPinGroupListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetFabricSanPinGroupListRequest) Expand(expand string) ApiGetFabricSanPinGroupListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetFabricSanPinGroupListRequest) Apply(apply string) ApiGetFabricSanPinGroupListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetFabricSanPinGroupListRequest) Count(count bool) ApiGetFabricSanPinGroupListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetFabricSanPinGroupListRequest) Inlinecount(inlinecount string) ApiGetFabricSanPinGroupListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetFabricSanPinGroupListRequest) At(at string) ApiGetFabricSanPinGroupListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetFabricSanPinGroupListRequest) Tags(tags string) ApiGetFabricSanPinGroupListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFabricSanPinGroupListRequest) Execute() (FabricSanPinGroupResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetFabricSanPinGroupListExecute(r)
+}
+
+/*
+GetFabricSanPinGroupList Read a 'fabric.SanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetFabricSanPinGroupListRequest
+*/
+func (a *FabricApiService) GetFabricSanPinGroupList(ctx _context.Context) ApiGetFabricSanPinGroupListRequest {
+	return ApiGetFabricSanPinGroupListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return FabricSanPinGroupResponse
+func (a *FabricApiService) GetFabricSanPinGroupListExecute(r ApiGetFabricSanPinGroupListRequest) (FabricSanPinGroupResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricSanPinGroupResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSanPinGroupList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/SanPinGroups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -24716,6 +26974,178 @@ func (a *FabricApiService) PatchFabricFlowControlPolicyExecute(r ApiPatchFabricF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchFabricLanPinGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *FabricApiService
+	moid              string
+	fabricLanPinGroup *FabricLanPinGroup
+	ifMatch           *string
+}
+
+// The &#39;fabric.LanPinGroup&#39; resource to update.
+func (r ApiPatchFabricLanPinGroupRequest) FabricLanPinGroup(fabricLanPinGroup FabricLanPinGroup) ApiPatchFabricLanPinGroupRequest {
+	r.fabricLanPinGroup = &fabricLanPinGroup
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchFabricLanPinGroupRequest) IfMatch(ifMatch string) ApiPatchFabricLanPinGroupRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchFabricLanPinGroupRequest) Execute() (FabricLanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.PatchFabricLanPinGroupExecute(r)
+}
+
+/*
+PatchFabricLanPinGroup Update a 'fabric.LanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFabricLanPinGroupRequest
+*/
+func (a *FabricApiService) PatchFabricLanPinGroup(ctx _context.Context, moid string) ApiPatchFabricLanPinGroupRequest {
+	return ApiPatchFabricLanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricLanPinGroup
+func (a *FabricApiService) PatchFabricLanPinGroupExecute(r ApiPatchFabricLanPinGroupRequest) (FabricLanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricLanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricLanPinGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/LanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricLanPinGroup == nil {
+		return localVarReturnValue, nil, reportError("fabricLanPinGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricLanPinGroup
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchFabricLinkAggregationPolicyRequest struct {
 	ctx                         _context.Context
 	ApiService                  *FabricApiService
@@ -25836,6 +28266,178 @@ func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPoli
 	}
 	// body params
 	localVarPostBody = r.fabricPortPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchFabricSanPinGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *FabricApiService
+	moid              string
+	fabricSanPinGroup *FabricSanPinGroup
+	ifMatch           *string
+}
+
+// The &#39;fabric.SanPinGroup&#39; resource to update.
+func (r ApiPatchFabricSanPinGroupRequest) FabricSanPinGroup(fabricSanPinGroup FabricSanPinGroup) ApiPatchFabricSanPinGroupRequest {
+	r.fabricSanPinGroup = &fabricSanPinGroup
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchFabricSanPinGroupRequest) IfMatch(ifMatch string) ApiPatchFabricSanPinGroupRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchFabricSanPinGroupRequest) Execute() (FabricSanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.PatchFabricSanPinGroupExecute(r)
+}
+
+/*
+PatchFabricSanPinGroup Update a 'fabric.SanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchFabricSanPinGroupRequest
+*/
+func (a *FabricApiService) PatchFabricSanPinGroup(ctx _context.Context, moid string) ApiPatchFabricSanPinGroupRequest {
+	return ApiPatchFabricSanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricSanPinGroup
+func (a *FabricApiService) PatchFabricSanPinGroupExecute(r ApiPatchFabricSanPinGroupRequest) (FabricSanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricSanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricSanPinGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/SanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricSanPinGroup == nil {
+		return localVarReturnValue, nil, reportError("fabricSanPinGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricSanPinGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -29704,6 +32306,178 @@ func (a *FabricApiService) UpdateFabricFlowControlPolicyExecute(r ApiUpdateFabri
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateFabricLanPinGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *FabricApiService
+	moid              string
+	fabricLanPinGroup *FabricLanPinGroup
+	ifMatch           *string
+}
+
+// The &#39;fabric.LanPinGroup&#39; resource to update.
+func (r ApiUpdateFabricLanPinGroupRequest) FabricLanPinGroup(fabricLanPinGroup FabricLanPinGroup) ApiUpdateFabricLanPinGroupRequest {
+	r.fabricLanPinGroup = &fabricLanPinGroup
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateFabricLanPinGroupRequest) IfMatch(ifMatch string) ApiUpdateFabricLanPinGroupRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateFabricLanPinGroupRequest) Execute() (FabricLanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.UpdateFabricLanPinGroupExecute(r)
+}
+
+/*
+UpdateFabricLanPinGroup Update a 'fabric.LanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFabricLanPinGroupRequest
+*/
+func (a *FabricApiService) UpdateFabricLanPinGroup(ctx _context.Context, moid string) ApiUpdateFabricLanPinGroupRequest {
+	return ApiUpdateFabricLanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricLanPinGroup
+func (a *FabricApiService) UpdateFabricLanPinGroupExecute(r ApiUpdateFabricLanPinGroupRequest) (FabricLanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricLanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricLanPinGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/LanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricLanPinGroup == nil {
+		return localVarReturnValue, nil, reportError("fabricLanPinGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricLanPinGroup
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateFabricLinkAggregationPolicyRequest struct {
 	ctx                         _context.Context
 	ApiService                  *FabricApiService
@@ -30824,6 +33598,178 @@ func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPo
 	}
 	// body params
 	localVarPostBody = r.fabricPortPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateFabricSanPinGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *FabricApiService
+	moid              string
+	fabricSanPinGroup *FabricSanPinGroup
+	ifMatch           *string
+}
+
+// The &#39;fabric.SanPinGroup&#39; resource to update.
+func (r ApiUpdateFabricSanPinGroupRequest) FabricSanPinGroup(fabricSanPinGroup FabricSanPinGroup) ApiUpdateFabricSanPinGroupRequest {
+	r.fabricSanPinGroup = &fabricSanPinGroup
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateFabricSanPinGroupRequest) IfMatch(ifMatch string) ApiUpdateFabricSanPinGroupRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateFabricSanPinGroupRequest) Execute() (FabricSanPinGroup, *_nethttp.Response, error) {
+	return r.ApiService.UpdateFabricSanPinGroupExecute(r)
+}
+
+/*
+UpdateFabricSanPinGroup Update a 'fabric.SanPinGroup' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateFabricSanPinGroupRequest
+*/
+func (a *FabricApiService) UpdateFabricSanPinGroup(ctx _context.Context, moid string) ApiUpdateFabricSanPinGroupRequest {
+	return ApiUpdateFabricSanPinGroupRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return FabricSanPinGroup
+func (a *FabricApiService) UpdateFabricSanPinGroupExecute(r ApiUpdateFabricSanPinGroupRequest) (FabricSanPinGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FabricSanPinGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricSanPinGroup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/SanPinGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricSanPinGroup == nil {
+		return localVarReturnValue, nil, reportError("fabricSanPinGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricSanPinGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

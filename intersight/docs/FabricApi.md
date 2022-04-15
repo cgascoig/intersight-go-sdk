@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**CreateFabricFcoeUplinkPcRole**](FabricApi.md#CreateFabricFcoeUplinkPcRole) | **Post** /api/v1/fabric/FcoeUplinkPcRoles | Create a &#39;fabric.FcoeUplinkPcRole&#39; resource.
 [**CreateFabricFcoeUplinkRole**](FabricApi.md#CreateFabricFcoeUplinkRole) | **Post** /api/v1/fabric/FcoeUplinkRoles | Create a &#39;fabric.FcoeUplinkRole&#39; resource.
 [**CreateFabricFlowControlPolicy**](FabricApi.md#CreateFabricFlowControlPolicy) | **Post** /api/v1/fabric/FlowControlPolicies | Create a &#39;fabric.FlowControlPolicy&#39; resource.
+[**CreateFabricLanPinGroup**](FabricApi.md#CreateFabricLanPinGroup) | **Post** /api/v1/fabric/LanPinGroups | Create a &#39;fabric.LanPinGroup&#39; resource.
 [**CreateFabricLinkAggregationPolicy**](FabricApi.md#CreateFabricLinkAggregationPolicy) | **Post** /api/v1/fabric/LinkAggregationPolicies | Create a &#39;fabric.LinkAggregationPolicy&#39; resource.
 [**CreateFabricLinkControlPolicy**](FabricApi.md#CreateFabricLinkControlPolicy) | **Post** /api/v1/fabric/LinkControlPolicies | Create a &#39;fabric.LinkControlPolicy&#39; resource.
 [**CreateFabricMulticastPolicy**](FabricApi.md#CreateFabricMulticastPolicy) | **Post** /api/v1/fabric/MulticastPolicies | Create a &#39;fabric.MulticastPolicy&#39; resource.
@@ -24,6 +25,7 @@ Method | HTTP request | Description
 [**CreateFabricPortMode**](FabricApi.md#CreateFabricPortMode) | **Post** /api/v1/fabric/PortModes | Create a &#39;fabric.PortMode&#39; resource.
 [**CreateFabricPortOperation**](FabricApi.md#CreateFabricPortOperation) | **Post** /api/v1/fabric/PortOperations | Create a &#39;fabric.PortOperation&#39; resource.
 [**CreateFabricPortPolicy**](FabricApi.md#CreateFabricPortPolicy) | **Post** /api/v1/fabric/PortPolicies | Create a &#39;fabric.PortPolicy&#39; resource.
+[**CreateFabricSanPinGroup**](FabricApi.md#CreateFabricSanPinGroup) | **Post** /api/v1/fabric/SanPinGroups | Create a &#39;fabric.SanPinGroup&#39; resource.
 [**CreateFabricServerRole**](FabricApi.md#CreateFabricServerRole) | **Post** /api/v1/fabric/ServerRoles | Create a &#39;fabric.ServerRole&#39; resource.
 [**CreateFabricSwitchClusterProfile**](FabricApi.md#CreateFabricSwitchClusterProfile) | **Post** /api/v1/fabric/SwitchClusterProfiles | Create a &#39;fabric.SwitchClusterProfile&#39; resource.
 [**CreateFabricSwitchControlPolicy**](FabricApi.md#CreateFabricSwitchControlPolicy) | **Post** /api/v1/fabric/SwitchControlPolicies | Create a &#39;fabric.SwitchControlPolicy&#39; resource.
@@ -45,6 +47,7 @@ Method | HTTP request | Description
 [**DeleteFabricFcoeUplinkPcRole**](FabricApi.md#DeleteFabricFcoeUplinkPcRole) | **Delete** /api/v1/fabric/FcoeUplinkPcRoles/{Moid} | Delete a &#39;fabric.FcoeUplinkPcRole&#39; resource.
 [**DeleteFabricFcoeUplinkRole**](FabricApi.md#DeleteFabricFcoeUplinkRole) | **Delete** /api/v1/fabric/FcoeUplinkRoles/{Moid} | Delete a &#39;fabric.FcoeUplinkRole&#39; resource.
 [**DeleteFabricFlowControlPolicy**](FabricApi.md#DeleteFabricFlowControlPolicy) | **Delete** /api/v1/fabric/FlowControlPolicies/{Moid} | Delete a &#39;fabric.FlowControlPolicy&#39; resource.
+[**DeleteFabricLanPinGroup**](FabricApi.md#DeleteFabricLanPinGroup) | **Delete** /api/v1/fabric/LanPinGroups/{Moid} | Delete a &#39;fabric.LanPinGroup&#39; resource.
 [**DeleteFabricLinkAggregationPolicy**](FabricApi.md#DeleteFabricLinkAggregationPolicy) | **Delete** /api/v1/fabric/LinkAggregationPolicies/{Moid} | Delete a &#39;fabric.LinkAggregationPolicy&#39; resource.
 [**DeleteFabricLinkControlPolicy**](FabricApi.md#DeleteFabricLinkControlPolicy) | **Delete** /api/v1/fabric/LinkControlPolicies/{Moid} | Delete a &#39;fabric.LinkControlPolicy&#39; resource.
 [**DeleteFabricMulticastPolicy**](FabricApi.md#DeleteFabricMulticastPolicy) | **Delete** /api/v1/fabric/MulticastPolicies/{Moid} | Delete a &#39;fabric.MulticastPolicy&#39; resource.
@@ -52,6 +55,7 @@ Method | HTTP request | Description
 [**DeleteFabricPortMode**](FabricApi.md#DeleteFabricPortMode) | **Delete** /api/v1/fabric/PortModes/{Moid} | Delete a &#39;fabric.PortMode&#39; resource.
 [**DeleteFabricPortOperation**](FabricApi.md#DeleteFabricPortOperation) | **Delete** /api/v1/fabric/PortOperations/{Moid} | Delete a &#39;fabric.PortOperation&#39; resource.
 [**DeleteFabricPortPolicy**](FabricApi.md#DeleteFabricPortPolicy) | **Delete** /api/v1/fabric/PortPolicies/{Moid} | Delete a &#39;fabric.PortPolicy&#39; resource.
+[**DeleteFabricSanPinGroup**](FabricApi.md#DeleteFabricSanPinGroup) | **Delete** /api/v1/fabric/SanPinGroups/{Moid} | Delete a &#39;fabric.SanPinGroup&#39; resource.
 [**DeleteFabricServerRole**](FabricApi.md#DeleteFabricServerRole) | **Delete** /api/v1/fabric/ServerRoles/{Moid} | Delete a &#39;fabric.ServerRole&#39; resource.
 [**DeleteFabricSwitchClusterProfile**](FabricApi.md#DeleteFabricSwitchClusterProfile) | **Delete** /api/v1/fabric/SwitchClusterProfiles/{Moid} | Delete a &#39;fabric.SwitchClusterProfile&#39; resource.
 [**DeleteFabricSwitchControlPolicy**](FabricApi.md#DeleteFabricSwitchControlPolicy) | **Delete** /api/v1/fabric/SwitchControlPolicies/{Moid} | Delete a &#39;fabric.SwitchControlPolicy&#39; resource.
@@ -74,8 +78,12 @@ Method | HTTP request | Description
 [**GetFabricElementIdentityByMoid**](FabricApi.md#GetFabricElementIdentityByMoid) | **Get** /api/v1/fabric/ElementIdentities/{Moid} | Read a &#39;fabric.ElementIdentity&#39; resource.
 [**GetFabricElementIdentityList**](FabricApi.md#GetFabricElementIdentityList) | **Get** /api/v1/fabric/ElementIdentities | Read a &#39;fabric.ElementIdentity&#39; resource.
 [**GetFabricEthNetworkControlPolicyByMoid**](FabricApi.md#GetFabricEthNetworkControlPolicyByMoid) | **Get** /api/v1/fabric/EthNetworkControlPolicies/{Moid} | Read a &#39;fabric.EthNetworkControlPolicy&#39; resource.
+[**GetFabricEthNetworkControlPolicyInventoryByMoid**](FabricApi.md#GetFabricEthNetworkControlPolicyInventoryByMoid) | **Get** /api/v1/fabric/EthNetworkControlPolicyInventories/{Moid} | Read a &#39;fabric.EthNetworkControlPolicyInventory&#39; resource.
+[**GetFabricEthNetworkControlPolicyInventoryList**](FabricApi.md#GetFabricEthNetworkControlPolicyInventoryList) | **Get** /api/v1/fabric/EthNetworkControlPolicyInventories | Read a &#39;fabric.EthNetworkControlPolicyInventory&#39; resource.
 [**GetFabricEthNetworkControlPolicyList**](FabricApi.md#GetFabricEthNetworkControlPolicyList) | **Get** /api/v1/fabric/EthNetworkControlPolicies | Read a &#39;fabric.EthNetworkControlPolicy&#39; resource.
 [**GetFabricEthNetworkGroupPolicyByMoid**](FabricApi.md#GetFabricEthNetworkGroupPolicyByMoid) | **Get** /api/v1/fabric/EthNetworkGroupPolicies/{Moid} | Read a &#39;fabric.EthNetworkGroupPolicy&#39; resource.
+[**GetFabricEthNetworkGroupPolicyInventoryByMoid**](FabricApi.md#GetFabricEthNetworkGroupPolicyInventoryByMoid) | **Get** /api/v1/fabric/EthNetworkGroupPolicyInventories/{Moid} | Read a &#39;fabric.EthNetworkGroupPolicyInventory&#39; resource.
+[**GetFabricEthNetworkGroupPolicyInventoryList**](FabricApi.md#GetFabricEthNetworkGroupPolicyInventoryList) | **Get** /api/v1/fabric/EthNetworkGroupPolicyInventories | Read a &#39;fabric.EthNetworkGroupPolicyInventory&#39; resource.
 [**GetFabricEthNetworkGroupPolicyList**](FabricApi.md#GetFabricEthNetworkGroupPolicyList) | **Get** /api/v1/fabric/EthNetworkGroupPolicies | Read a &#39;fabric.EthNetworkGroupPolicy&#39; resource.
 [**GetFabricEthNetworkPolicyByMoid**](FabricApi.md#GetFabricEthNetworkPolicyByMoid) | **Get** /api/v1/fabric/EthNetworkPolicies/{Moid} | Read a &#39;fabric.EthNetworkPolicy&#39; resource.
 [**GetFabricEthNetworkPolicyList**](FabricApi.md#GetFabricEthNetworkPolicyList) | **Get** /api/v1/fabric/EthNetworkPolicies | Read a &#39;fabric.EthNetworkPolicy&#39; resource.
@@ -93,6 +101,8 @@ Method | HTTP request | Description
 [**GetFabricFcoeUplinkRoleList**](FabricApi.md#GetFabricFcoeUplinkRoleList) | **Get** /api/v1/fabric/FcoeUplinkRoles | Read a &#39;fabric.FcoeUplinkRole&#39; resource.
 [**GetFabricFlowControlPolicyByMoid**](FabricApi.md#GetFabricFlowControlPolicyByMoid) | **Get** /api/v1/fabric/FlowControlPolicies/{Moid} | Read a &#39;fabric.FlowControlPolicy&#39; resource.
 [**GetFabricFlowControlPolicyList**](FabricApi.md#GetFabricFlowControlPolicyList) | **Get** /api/v1/fabric/FlowControlPolicies | Read a &#39;fabric.FlowControlPolicy&#39; resource.
+[**GetFabricLanPinGroupByMoid**](FabricApi.md#GetFabricLanPinGroupByMoid) | **Get** /api/v1/fabric/LanPinGroups/{Moid} | Read a &#39;fabric.LanPinGroup&#39; resource.
+[**GetFabricLanPinGroupList**](FabricApi.md#GetFabricLanPinGroupList) | **Get** /api/v1/fabric/LanPinGroups | Read a &#39;fabric.LanPinGroup&#39; resource.
 [**GetFabricLinkAggregationPolicyByMoid**](FabricApi.md#GetFabricLinkAggregationPolicyByMoid) | **Get** /api/v1/fabric/LinkAggregationPolicies/{Moid} | Read a &#39;fabric.LinkAggregationPolicy&#39; resource.
 [**GetFabricLinkAggregationPolicyList**](FabricApi.md#GetFabricLinkAggregationPolicyList) | **Get** /api/v1/fabric/LinkAggregationPolicies | Read a &#39;fabric.LinkAggregationPolicy&#39; resource.
 [**GetFabricLinkControlPolicyByMoid**](FabricApi.md#GetFabricLinkControlPolicyByMoid) | **Get** /api/v1/fabric/LinkControlPolicies/{Moid} | Read a &#39;fabric.LinkControlPolicy&#39; resource.
@@ -109,6 +119,8 @@ Method | HTTP request | Description
 [**GetFabricPortOperationList**](FabricApi.md#GetFabricPortOperationList) | **Get** /api/v1/fabric/PortOperations | Read a &#39;fabric.PortOperation&#39; resource.
 [**GetFabricPortPolicyByMoid**](FabricApi.md#GetFabricPortPolicyByMoid) | **Get** /api/v1/fabric/PortPolicies/{Moid} | Read a &#39;fabric.PortPolicy&#39; resource.
 [**GetFabricPortPolicyList**](FabricApi.md#GetFabricPortPolicyList) | **Get** /api/v1/fabric/PortPolicies | Read a &#39;fabric.PortPolicy&#39; resource.
+[**GetFabricSanPinGroupByMoid**](FabricApi.md#GetFabricSanPinGroupByMoid) | **Get** /api/v1/fabric/SanPinGroups/{Moid} | Read a &#39;fabric.SanPinGroup&#39; resource.
+[**GetFabricSanPinGroupList**](FabricApi.md#GetFabricSanPinGroupList) | **Get** /api/v1/fabric/SanPinGroups | Read a &#39;fabric.SanPinGroup&#39; resource.
 [**GetFabricServerRoleByMoid**](FabricApi.md#GetFabricServerRoleByMoid) | **Get** /api/v1/fabric/ServerRoles/{Moid} | Read a &#39;fabric.ServerRole&#39; resource.
 [**GetFabricServerRoleList**](FabricApi.md#GetFabricServerRoleList) | **Get** /api/v1/fabric/ServerRoles | Read a &#39;fabric.ServerRole&#39; resource.
 [**GetFabricSwitchClusterProfileByMoid**](FabricApi.md#GetFabricSwitchClusterProfileByMoid) | **Get** /api/v1/fabric/SwitchClusterProfiles/{Moid} | Read a &#39;fabric.SwitchClusterProfile&#39; resource.
@@ -140,6 +152,7 @@ Method | HTTP request | Description
 [**PatchFabricFcoeUplinkPcRole**](FabricApi.md#PatchFabricFcoeUplinkPcRole) | **Patch** /api/v1/fabric/FcoeUplinkPcRoles/{Moid} | Update a &#39;fabric.FcoeUplinkPcRole&#39; resource.
 [**PatchFabricFcoeUplinkRole**](FabricApi.md#PatchFabricFcoeUplinkRole) | **Patch** /api/v1/fabric/FcoeUplinkRoles/{Moid} | Update a &#39;fabric.FcoeUplinkRole&#39; resource.
 [**PatchFabricFlowControlPolicy**](FabricApi.md#PatchFabricFlowControlPolicy) | **Patch** /api/v1/fabric/FlowControlPolicies/{Moid} | Update a &#39;fabric.FlowControlPolicy&#39; resource.
+[**PatchFabricLanPinGroup**](FabricApi.md#PatchFabricLanPinGroup) | **Patch** /api/v1/fabric/LanPinGroups/{Moid} | Update a &#39;fabric.LanPinGroup&#39; resource.
 [**PatchFabricLinkAggregationPolicy**](FabricApi.md#PatchFabricLinkAggregationPolicy) | **Patch** /api/v1/fabric/LinkAggregationPolicies/{Moid} | Update a &#39;fabric.LinkAggregationPolicy&#39; resource.
 [**PatchFabricLinkControlPolicy**](FabricApi.md#PatchFabricLinkControlPolicy) | **Patch** /api/v1/fabric/LinkControlPolicies/{Moid} | Update a &#39;fabric.LinkControlPolicy&#39; resource.
 [**PatchFabricMulticastPolicy**](FabricApi.md#PatchFabricMulticastPolicy) | **Patch** /api/v1/fabric/MulticastPolicies/{Moid} | Update a &#39;fabric.MulticastPolicy&#39; resource.
@@ -147,6 +160,7 @@ Method | HTTP request | Description
 [**PatchFabricPortMode**](FabricApi.md#PatchFabricPortMode) | **Patch** /api/v1/fabric/PortModes/{Moid} | Update a &#39;fabric.PortMode&#39; resource.
 [**PatchFabricPortOperation**](FabricApi.md#PatchFabricPortOperation) | **Patch** /api/v1/fabric/PortOperations/{Moid} | Update a &#39;fabric.PortOperation&#39; resource.
 [**PatchFabricPortPolicy**](FabricApi.md#PatchFabricPortPolicy) | **Patch** /api/v1/fabric/PortPolicies/{Moid} | Update a &#39;fabric.PortPolicy&#39; resource.
+[**PatchFabricSanPinGroup**](FabricApi.md#PatchFabricSanPinGroup) | **Patch** /api/v1/fabric/SanPinGroups/{Moid} | Update a &#39;fabric.SanPinGroup&#39; resource.
 [**PatchFabricServerRole**](FabricApi.md#PatchFabricServerRole) | **Patch** /api/v1/fabric/ServerRoles/{Moid} | Update a &#39;fabric.ServerRole&#39; resource.
 [**PatchFabricSwitchClusterProfile**](FabricApi.md#PatchFabricSwitchClusterProfile) | **Patch** /api/v1/fabric/SwitchClusterProfiles/{Moid} | Update a &#39;fabric.SwitchClusterProfile&#39; resource.
 [**PatchFabricSwitchControlPolicy**](FabricApi.md#PatchFabricSwitchControlPolicy) | **Patch** /api/v1/fabric/SwitchControlPolicies/{Moid} | Update a &#39;fabric.SwitchControlPolicy&#39; resource.
@@ -169,6 +183,7 @@ Method | HTTP request | Description
 [**UpdateFabricFcoeUplinkPcRole**](FabricApi.md#UpdateFabricFcoeUplinkPcRole) | **Post** /api/v1/fabric/FcoeUplinkPcRoles/{Moid} | Update a &#39;fabric.FcoeUplinkPcRole&#39; resource.
 [**UpdateFabricFcoeUplinkRole**](FabricApi.md#UpdateFabricFcoeUplinkRole) | **Post** /api/v1/fabric/FcoeUplinkRoles/{Moid} | Update a &#39;fabric.FcoeUplinkRole&#39; resource.
 [**UpdateFabricFlowControlPolicy**](FabricApi.md#UpdateFabricFlowControlPolicy) | **Post** /api/v1/fabric/FlowControlPolicies/{Moid} | Update a &#39;fabric.FlowControlPolicy&#39; resource.
+[**UpdateFabricLanPinGroup**](FabricApi.md#UpdateFabricLanPinGroup) | **Post** /api/v1/fabric/LanPinGroups/{Moid} | Update a &#39;fabric.LanPinGroup&#39; resource.
 [**UpdateFabricLinkAggregationPolicy**](FabricApi.md#UpdateFabricLinkAggregationPolicy) | **Post** /api/v1/fabric/LinkAggregationPolicies/{Moid} | Update a &#39;fabric.LinkAggregationPolicy&#39; resource.
 [**UpdateFabricLinkControlPolicy**](FabricApi.md#UpdateFabricLinkControlPolicy) | **Post** /api/v1/fabric/LinkControlPolicies/{Moid} | Update a &#39;fabric.LinkControlPolicy&#39; resource.
 [**UpdateFabricMulticastPolicy**](FabricApi.md#UpdateFabricMulticastPolicy) | **Post** /api/v1/fabric/MulticastPolicies/{Moid} | Update a &#39;fabric.MulticastPolicy&#39; resource.
@@ -176,6 +191,7 @@ Method | HTTP request | Description
 [**UpdateFabricPortMode**](FabricApi.md#UpdateFabricPortMode) | **Post** /api/v1/fabric/PortModes/{Moid} | Update a &#39;fabric.PortMode&#39; resource.
 [**UpdateFabricPortOperation**](FabricApi.md#UpdateFabricPortOperation) | **Post** /api/v1/fabric/PortOperations/{Moid} | Update a &#39;fabric.PortOperation&#39; resource.
 [**UpdateFabricPortPolicy**](FabricApi.md#UpdateFabricPortPolicy) | **Post** /api/v1/fabric/PortPolicies/{Moid} | Update a &#39;fabric.PortPolicy&#39; resource.
+[**UpdateFabricSanPinGroup**](FabricApi.md#UpdateFabricSanPinGroup) | **Post** /api/v1/fabric/SanPinGroups/{Moid} | Update a &#39;fabric.SanPinGroup&#39; resource.
 [**UpdateFabricServerRole**](FabricApi.md#UpdateFabricServerRole) | **Post** /api/v1/fabric/ServerRoles/{Moid} | Update a &#39;fabric.ServerRole&#39; resource.
 [**UpdateFabricSwitchClusterProfile**](FabricApi.md#UpdateFabricSwitchClusterProfile) | **Post** /api/v1/fabric/SwitchClusterProfiles/{Moid} | Update a &#39;fabric.SwitchClusterProfile&#39; resource.
 [**UpdateFabricSwitchControlPolicy**](FabricApi.md#UpdateFabricSwitchControlPolicy) | **Post** /api/v1/fabric/SwitchControlPolicies/{Moid} | Update a &#39;fabric.SwitchControlPolicy&#39; resource.
@@ -1072,6 +1088,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateFabricLanPinGroup
+
+> FabricLanPinGroup CreateFabricLanPinGroup(ctx).FabricLanPinGroup(fabricLanPinGroup).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'fabric.LanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    fabricLanPinGroup := *openapiclient.NewFabricLanPinGroup("ClassId_example", "ObjectType_example") // FabricLanPinGroup | The 'fabric.LanPinGroup' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.CreateFabricLanPinGroup(context.Background()).FabricLanPinGroup(fabricLanPinGroup).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.CreateFabricLanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateFabricLanPinGroup`: FabricLanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.CreateFabricLanPinGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateFabricLanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fabricLanPinGroup** | [**FabricLanPinGroup**](FabricLanPinGroup.md) | The &#39;fabric.LanPinGroup&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**FabricLanPinGroup**](FabricLanPinGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateFabricLinkAggregationPolicy
 
 > FabricLinkAggregationPolicy CreateFabricLinkAggregationPolicy(ctx).FabricLinkAggregationPolicy(fabricLinkAggregationPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1533,6 +1617,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FabricPortPolicy**](FabricPortPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateFabricSanPinGroup
+
+> FabricSanPinGroup CreateFabricSanPinGroup(ctx).FabricSanPinGroup(fabricSanPinGroup).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'fabric.SanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    fabricSanPinGroup := *openapiclient.NewFabricSanPinGroup("ClassId_example", "ObjectType_example") // FabricSanPinGroup | The 'fabric.SanPinGroup' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.CreateFabricSanPinGroup(context.Background()).FabricSanPinGroup(fabricSanPinGroup).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.CreateFabricSanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateFabricSanPinGroup`: FabricSanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.CreateFabricSanPinGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateFabricSanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fabricSanPinGroup** | [**FabricSanPinGroup**](FabricSanPinGroup.md) | The &#39;fabric.SanPinGroup&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**FabricSanPinGroup**](FabricSanPinGroup.md)
 
 ### Authorization
 
@@ -2952,6 +3104,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteFabricLanPinGroup
+
+> DeleteFabricLanPinGroup(ctx, moid).Execute()
+
+Delete a 'fabric.LanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.DeleteFabricLanPinGroup(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.DeleteFabricLanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteFabricLanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteFabricLinkAggregationPolicy
 
 > DeleteFabricLinkAggregationPolicy(ctx, moid).Execute()
@@ -3390,6 +3608,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteFabricPortPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteFabricSanPinGroup
+
+> DeleteFabricSanPinGroup(ctx, moid).Execute()
+
+Delete a 'fabric.SanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.DeleteFabricSanPinGroup(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.DeleteFabricSanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteFabricSanPinGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -4988,6 +5272,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetFabricEthNetworkControlPolicyInventoryByMoid
+
+> FabricEthNetworkControlPolicyInventory GetFabricEthNetworkControlPolicyInventoryByMoid(ctx, moid).Execute()
+
+Read a 'fabric.EthNetworkControlPolicyInventory' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricEthNetworkControlPolicyInventoryByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricEthNetworkControlPolicyInventoryByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricEthNetworkControlPolicyInventoryByMoid`: FabricEthNetworkControlPolicyInventory
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricEthNetworkControlPolicyInventoryByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricEthNetworkControlPolicyInventoryByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**FabricEthNetworkControlPolicyInventory**](FabricEthNetworkControlPolicyInventory.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFabricEthNetworkControlPolicyInventoryList
+
+> FabricEthNetworkControlPolicyInventoryResponse GetFabricEthNetworkControlPolicyInventoryList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'fabric.EthNetworkControlPolicyInventory' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricEthNetworkControlPolicyInventoryList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricEthNetworkControlPolicyInventoryList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricEthNetworkControlPolicyInventoryList`: FabricEthNetworkControlPolicyInventoryResponse
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricEthNetworkControlPolicyInventoryList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricEthNetworkControlPolicyInventoryListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**FabricEthNetworkControlPolicyInventoryResponse**](FabricEthNetworkControlPolicyInventoryResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetFabricEthNetworkControlPolicyList
 
 > FabricEthNetworkControlPolicyResponse GetFabricEthNetworkControlPolicyList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
@@ -5125,6 +5561,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FabricEthNetworkGroupPolicy**](FabricEthNetworkGroupPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFabricEthNetworkGroupPolicyInventoryByMoid
+
+> FabricEthNetworkGroupPolicyInventory GetFabricEthNetworkGroupPolicyInventoryByMoid(ctx, moid).Execute()
+
+Read a 'fabric.EthNetworkGroupPolicyInventory' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricEthNetworkGroupPolicyInventoryByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricEthNetworkGroupPolicyInventoryByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricEthNetworkGroupPolicyInventoryByMoid`: FabricEthNetworkGroupPolicyInventory
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricEthNetworkGroupPolicyInventoryByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricEthNetworkGroupPolicyInventoryByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**FabricEthNetworkGroupPolicyInventory**](FabricEthNetworkGroupPolicyInventory.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFabricEthNetworkGroupPolicyInventoryList
+
+> FabricEthNetworkGroupPolicyInventoryResponse GetFabricEthNetworkGroupPolicyInventoryList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'fabric.EthNetworkGroupPolicyInventory' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricEthNetworkGroupPolicyInventoryList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricEthNetworkGroupPolicyInventoryList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricEthNetworkGroupPolicyInventoryList`: FabricEthNetworkGroupPolicyInventoryResponse
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricEthNetworkGroupPolicyInventoryList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricEthNetworkGroupPolicyInventoryListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**FabricEthNetworkGroupPolicyInventoryResponse**](FabricEthNetworkGroupPolicyInventoryResponse.md)
 
 ### Authorization
 
@@ -6440,6 +7028,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetFabricLanPinGroupByMoid
+
+> FabricLanPinGroup GetFabricLanPinGroupByMoid(ctx, moid).Execute()
+
+Read a 'fabric.LanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricLanPinGroupByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricLanPinGroupByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricLanPinGroupByMoid`: FabricLanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricLanPinGroupByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricLanPinGroupByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**FabricLanPinGroup**](FabricLanPinGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFabricLanPinGroupList
+
+> FabricLanPinGroupResponse GetFabricLanPinGroupList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'fabric.LanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricLanPinGroupList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricLanPinGroupList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricLanPinGroupList`: FabricLanPinGroupResponse
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricLanPinGroupList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricLanPinGroupListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**FabricLanPinGroupResponse**](FabricLanPinGroupResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetFabricLinkAggregationPolicyByMoid
 
 > FabricLinkAggregationPolicy GetFabricLinkAggregationPolicyByMoid(ctx, moid).Execute()
@@ -7641,6 +8381,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FabricPortPolicyResponse**](FabricPortPolicyResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFabricSanPinGroupByMoid
+
+> FabricSanPinGroup GetFabricSanPinGroupByMoid(ctx, moid).Execute()
+
+Read a 'fabric.SanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricSanPinGroupByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricSanPinGroupByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricSanPinGroupByMoid`: FabricSanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricSanPinGroupByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricSanPinGroupByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**FabricSanPinGroup**](FabricSanPinGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFabricSanPinGroupList
+
+> FabricSanPinGroupResponse GetFabricSanPinGroupList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'fabric.SanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.GetFabricSanPinGroupList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.GetFabricSanPinGroupList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFabricSanPinGroupList`: FabricSanPinGroupResponse
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.GetFabricSanPinGroupList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFabricSanPinGroupListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**FabricSanPinGroupResponse**](FabricSanPinGroupResponse.md)
 
 ### Authorization
 
@@ -9960,6 +10852,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchFabricLanPinGroup
+
+> FabricLanPinGroup PatchFabricLanPinGroup(ctx, moid).FabricLanPinGroup(fabricLanPinGroup).IfMatch(ifMatch).Execute()
+
+Update a 'fabric.LanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    fabricLanPinGroup := *openapiclient.NewFabricLanPinGroup("ClassId_example", "ObjectType_example") // FabricLanPinGroup | The 'fabric.LanPinGroup' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.PatchFabricLanPinGroup(context.Background(), moid).FabricLanPinGroup(fabricLanPinGroup).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.PatchFabricLanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchFabricLanPinGroup`: FabricLanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.PatchFabricLanPinGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchFabricLanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fabricLanPinGroup** | [**FabricLanPinGroup**](FabricLanPinGroup.md) | The &#39;fabric.LanPinGroup&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**FabricLanPinGroup**](FabricLanPinGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchFabricLinkAggregationPolicy
 
 > FabricLinkAggregationPolicy PatchFabricLinkAggregationPolicy(ctx, moid).FabricLinkAggregationPolicy(fabricLinkAggregationPolicy).IfMatch(ifMatch).Execute()
@@ -10449,6 +11413,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FabricPortPolicy**](FabricPortPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchFabricSanPinGroup
+
+> FabricSanPinGroup PatchFabricSanPinGroup(ctx, moid).FabricSanPinGroup(fabricSanPinGroup).IfMatch(ifMatch).Execute()
+
+Update a 'fabric.SanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    fabricSanPinGroup := *openapiclient.NewFabricSanPinGroup("ClassId_example", "ObjectType_example") // FabricSanPinGroup | The 'fabric.SanPinGroup' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.PatchFabricSanPinGroup(context.Background(), moid).FabricSanPinGroup(fabricSanPinGroup).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.PatchFabricSanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchFabricSanPinGroup`: FabricSanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.PatchFabricSanPinGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchFabricSanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fabricSanPinGroup** | [**FabricSanPinGroup**](FabricSanPinGroup.md) | The &#39;fabric.SanPinGroup&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**FabricSanPinGroup**](FabricSanPinGroup.md)
 
 ### Authorization
 
@@ -12048,6 +13084,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateFabricLanPinGroup
+
+> FabricLanPinGroup UpdateFabricLanPinGroup(ctx, moid).FabricLanPinGroup(fabricLanPinGroup).IfMatch(ifMatch).Execute()
+
+Update a 'fabric.LanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    fabricLanPinGroup := *openapiclient.NewFabricLanPinGroup("ClassId_example", "ObjectType_example") // FabricLanPinGroup | The 'fabric.LanPinGroup' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.UpdateFabricLanPinGroup(context.Background(), moid).FabricLanPinGroup(fabricLanPinGroup).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.UpdateFabricLanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateFabricLanPinGroup`: FabricLanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.UpdateFabricLanPinGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateFabricLanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fabricLanPinGroup** | [**FabricLanPinGroup**](FabricLanPinGroup.md) | The &#39;fabric.LanPinGroup&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**FabricLanPinGroup**](FabricLanPinGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateFabricLinkAggregationPolicy
 
 > FabricLinkAggregationPolicy UpdateFabricLinkAggregationPolicy(ctx, moid).FabricLinkAggregationPolicy(fabricLinkAggregationPolicy).IfMatch(ifMatch).Execute()
@@ -12537,6 +13645,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FabricPortPolicy**](FabricPortPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateFabricSanPinGroup
+
+> FabricSanPinGroup UpdateFabricSanPinGroup(ctx, moid).FabricSanPinGroup(fabricSanPinGroup).IfMatch(ifMatch).Execute()
+
+Update a 'fabric.SanPinGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    fabricSanPinGroup := *openapiclient.NewFabricSanPinGroup("ClassId_example", "ObjectType_example") // FabricSanPinGroup | The 'fabric.SanPinGroup' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FabricApi.UpdateFabricSanPinGroup(context.Background(), moid).FabricSanPinGroup(fabricSanPinGroup).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FabricApi.UpdateFabricSanPinGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateFabricSanPinGroup`: FabricSanPinGroup
+    fmt.Fprintf(os.Stdout, "Response from `FabricApi.UpdateFabricSanPinGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateFabricSanPinGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **fabricSanPinGroup** | [**FabricSanPinGroup**](FabricSanPinGroup.md) | The &#39;fabric.SanPinGroup&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**FabricSanPinGroup**](FabricSanPinGroup.md)
 
 ### Authorization
 

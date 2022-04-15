@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -4299,6 +4299,412 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAda
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicEthAdapterPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) Execute() (VnicEthAdapterPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthAdapterPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicEthAdapterPolicyInventoryByMoid Read a 'vnic.EthAdapterPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicEthAdapterPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicEthAdapterPolicyInventoryByMoidRequest {
+	return ApiGetVnicEthAdapterPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthAdapterPolicyInventory
+func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryByMoidExecute(r ApiGetVnicEthAdapterPolicyInventoryByMoidRequest) (VnicEthAdapterPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthAdapterPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthAdapterPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthAdapterPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Filter(filter string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Top(top int32) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Expand(expand string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Apply(apply string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Count(count bool) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) At(at string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Tags(tags string) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicEthAdapterPolicyInventoryListRequest) Execute() (VnicEthAdapterPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthAdapterPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicEthAdapterPolicyInventoryList Read a 'vnic.EthAdapterPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicEthAdapterPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryList(ctx _context.Context) ApiGetVnicEthAdapterPolicyInventoryListRequest {
+	return ApiGetVnicEthAdapterPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthAdapterPolicyInventoryResponse
+func (a *VnicApiService) GetVnicEthAdapterPolicyInventoryListExecute(r ApiGetVnicEthAdapterPolicyInventoryListRequest) (VnicEthAdapterPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthAdapterPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthAdapterPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicEthAdapterPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -4604,6 +5010,412 @@ func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidReques
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthIfInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicEthIfInventoryByMoidRequest) Execute() (VnicEthIfInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthIfInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicEthIfInventoryByMoid Read a 'vnic.EthIfInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicEthIfInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicEthIfInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicEthIfInventoryByMoidRequest {
+	return ApiGetVnicEthIfInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthIfInventory
+func (a *VnicApiService) GetVnicEthIfInventoryByMoidExecute(r ApiGetVnicEthIfInventoryByMoidRequest) (VnicEthIfInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthIfInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthIfInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthIfInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthIfInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicEthIfInventoryListRequest) Filter(filter string) ApiGetVnicEthIfInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicEthIfInventoryListRequest) Orderby(orderby string) ApiGetVnicEthIfInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicEthIfInventoryListRequest) Top(top int32) ApiGetVnicEthIfInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicEthIfInventoryListRequest) Skip(skip int32) ApiGetVnicEthIfInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthIfInventoryListRequest) Select_(select_ string) ApiGetVnicEthIfInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthIfInventoryListRequest) Expand(expand string) ApiGetVnicEthIfInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicEthIfInventoryListRequest) Apply(apply string) ApiGetVnicEthIfInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicEthIfInventoryListRequest) Count(count bool) ApiGetVnicEthIfInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicEthIfInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicEthIfInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthIfInventoryListRequest) At(at string) ApiGetVnicEthIfInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicEthIfInventoryListRequest) Tags(tags string) ApiGetVnicEthIfInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicEthIfInventoryListRequest) Execute() (VnicEthIfInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthIfInventoryListExecute(r)
+}
+
+/*
+GetVnicEthIfInventoryList Read a 'vnic.EthIfInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicEthIfInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicEthIfInventoryList(ctx _context.Context) ApiGetVnicEthIfInventoryListRequest {
+	return ApiGetVnicEthIfInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthIfInventoryResponse
+func (a *VnicApiService) GetVnicEthIfInventoryListExecute(r ApiGetVnicEthIfInventoryListRequest) (VnicEthIfInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthIfInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthIfInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthIfInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5111,6 +5923,412 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicEthNetworkPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) Execute() (VnicEthNetworkPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthNetworkPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicEthNetworkPolicyInventoryByMoid Read a 'vnic.EthNetworkPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicEthNetworkPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicEthNetworkPolicyInventoryByMoidRequest {
+	return ApiGetVnicEthNetworkPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthNetworkPolicyInventory
+func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryByMoidExecute(r ApiGetVnicEthNetworkPolicyInventoryByMoidRequest) (VnicEthNetworkPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthNetworkPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthNetworkPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthNetworkPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Filter(filter string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Top(top int32) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Expand(expand string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Apply(apply string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Count(count bool) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) At(at string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Tags(tags string) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicEthNetworkPolicyInventoryListRequest) Execute() (VnicEthNetworkPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthNetworkPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicEthNetworkPolicyInventoryList Read a 'vnic.EthNetworkPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicEthNetworkPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryList(ctx _context.Context) ApiGetVnicEthNetworkPolicyInventoryListRequest {
+	return ApiGetVnicEthNetworkPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthNetworkPolicyInventoryResponse
+func (a *VnicApiService) GetVnicEthNetworkPolicyInventoryListExecute(r ApiGetVnicEthNetworkPolicyInventoryListRequest) (VnicEthNetworkPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthNetworkPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthNetworkPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicEthNetworkPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -5517,6 +6735,412 @@ func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPoli
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicEthQosPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicEthQosPolicyInventoryByMoidRequest) Execute() (VnicEthQosPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthQosPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicEthQosPolicyInventoryByMoid Read a 'vnic.EthQosPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicEthQosPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicEthQosPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicEthQosPolicyInventoryByMoidRequest {
+	return ApiGetVnicEthQosPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthQosPolicyInventory
+func (a *VnicApiService) GetVnicEthQosPolicyInventoryByMoidExecute(r ApiGetVnicEthQosPolicyInventoryByMoidRequest) (VnicEthQosPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthQosPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthQosPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthQosPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Filter(filter string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Top(top int32) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Expand(expand string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Apply(apply string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Count(count bool) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) At(at string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Tags(tags string) ApiGetVnicEthQosPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicEthQosPolicyInventoryListRequest) Execute() (VnicEthQosPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthQosPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicEthQosPolicyInventoryList Read a 'vnic.EthQosPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicEthQosPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicEthQosPolicyInventoryList(ctx _context.Context) ApiGetVnicEthQosPolicyInventoryListRequest {
+	return ApiGetVnicEthQosPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthQosPolicyInventoryResponse
+func (a *VnicApiService) GetVnicEthQosPolicyInventoryListExecute(r ApiGetVnicEthQosPolicyInventoryListRequest) (VnicEthQosPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthQosPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthQosPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicEthQosPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -5773,6 +7397,818 @@ func (a *VnicApiService) GetVnicEthQosPolicyListExecute(r ApiGetVnicEthQosPolicy
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicEthVethInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicEthVethInventoryByMoidRequest) Execute() (VnicEthVethInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthVethInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicEthVethInventoryByMoid Read a 'vnic.EthVethInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicEthVethInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicEthVethInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicEthVethInventoryByMoidRequest {
+	return ApiGetVnicEthVethInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthVethInventory
+func (a *VnicApiService) GetVnicEthVethInventoryByMoidExecute(r ApiGetVnicEthVethInventoryByMoidRequest) (VnicEthVethInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthVethInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthVethInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthVethInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthVethInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicEthVethInventoryListRequest) Filter(filter string) ApiGetVnicEthVethInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicEthVethInventoryListRequest) Orderby(orderby string) ApiGetVnicEthVethInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicEthVethInventoryListRequest) Top(top int32) ApiGetVnicEthVethInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicEthVethInventoryListRequest) Skip(skip int32) ApiGetVnicEthVethInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthVethInventoryListRequest) Select_(select_ string) ApiGetVnicEthVethInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthVethInventoryListRequest) Expand(expand string) ApiGetVnicEthVethInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicEthVethInventoryListRequest) Apply(apply string) ApiGetVnicEthVethInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicEthVethInventoryListRequest) Count(count bool) ApiGetVnicEthVethInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicEthVethInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicEthVethInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthVethInventoryListRequest) At(at string) ApiGetVnicEthVethInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicEthVethInventoryListRequest) Tags(tags string) ApiGetVnicEthVethInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicEthVethInventoryListRequest) Execute() (VnicEthVethInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthVethInventoryListExecute(r)
+}
+
+/*
+GetVnicEthVethInventoryList Read a 'vnic.EthVethInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicEthVethInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicEthVethInventoryList(ctx _context.Context) ApiGetVnicEthVethInventoryListRequest {
+	return ApiGetVnicEthVethInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthVethInventoryResponse
+func (a *VnicApiService) GetVnicEthVethInventoryListExecute(r ApiGetVnicEthVethInventoryListRequest) (VnicEthVethInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthVethInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthVethInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthVethInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthVnicInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicEthVnicInventoryByMoidRequest) Execute() (VnicEthVnicInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthVnicInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicEthVnicInventoryByMoid Read a 'vnic.EthVnicInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicEthVnicInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicEthVnicInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicEthVnicInventoryByMoidRequest {
+	return ApiGetVnicEthVnicInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthVnicInventory
+func (a *VnicApiService) GetVnicEthVnicInventoryByMoidExecute(r ApiGetVnicEthVnicInventoryByMoidRequest) (VnicEthVnicInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthVnicInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthVnicInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthVnicInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicEthVnicInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicEthVnicInventoryListRequest) Filter(filter string) ApiGetVnicEthVnicInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicEthVnicInventoryListRequest) Orderby(orderby string) ApiGetVnicEthVnicInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicEthVnicInventoryListRequest) Top(top int32) ApiGetVnicEthVnicInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicEthVnicInventoryListRequest) Skip(skip int32) ApiGetVnicEthVnicInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicEthVnicInventoryListRequest) Select_(select_ string) ApiGetVnicEthVnicInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicEthVnicInventoryListRequest) Expand(expand string) ApiGetVnicEthVnicInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicEthVnicInventoryListRequest) Apply(apply string) ApiGetVnicEthVnicInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicEthVnicInventoryListRequest) Count(count bool) ApiGetVnicEthVnicInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicEthVnicInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicEthVnicInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicEthVnicInventoryListRequest) At(at string) ApiGetVnicEthVnicInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicEthVnicInventoryListRequest) Tags(tags string) ApiGetVnicEthVnicInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicEthVnicInventoryListRequest) Execute() (VnicEthVnicInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicEthVnicInventoryListExecute(r)
+}
+
+/*
+GetVnicEthVnicInventoryList Read a 'vnic.EthVnicInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicEthVnicInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicEthVnicInventoryList(ctx _context.Context) ApiGetVnicEthVnicInventoryListRequest {
+	return ApiGetVnicEthVnicInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicEthVnicInventoryResponse
+func (a *VnicApiService) GetVnicEthVnicInventoryListExecute(r ApiGetVnicEthVnicInventoryListRequest) (VnicEthVnicInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicEthVnicInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthVnicInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/EthVnicInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicFcAdapterPolicyByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *VnicApiService
@@ -5822,6 +8258,412 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcAdapterPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) Execute() (VnicFcAdapterPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcAdapterPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicFcAdapterPolicyInventoryByMoid Read a 'vnic.FcAdapterPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicFcAdapterPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicFcAdapterPolicyInventoryByMoidRequest {
+	return ApiGetVnicFcAdapterPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcAdapterPolicyInventory
+func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryByMoidExecute(r ApiGetVnicFcAdapterPolicyInventoryByMoidRequest) (VnicFcAdapterPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcAdapterPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcAdapterPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcAdapterPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Filter(filter string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Top(top int32) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Expand(expand string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Apply(apply string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Count(count bool) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) At(at string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Tags(tags string) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicFcAdapterPolicyInventoryListRequest) Execute() (VnicFcAdapterPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcAdapterPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicFcAdapterPolicyInventoryList Read a 'vnic.FcAdapterPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicFcAdapterPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryList(ctx _context.Context) ApiGetVnicFcAdapterPolicyInventoryListRequest {
+	return ApiGetVnicFcAdapterPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcAdapterPolicyInventoryResponse
+func (a *VnicApiService) GetVnicFcAdapterPolicyInventoryListExecute(r ApiGetVnicFcAdapterPolicyInventoryListRequest) (VnicFcAdapterPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcAdapterPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcAdapterPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -6329,6 +9171,412 @@ func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicFcIfInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicFcIfInventoryByMoidRequest) Execute() (VnicFcIfInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcIfInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicFcIfInventoryByMoid Read a 'vnic.FcIfInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicFcIfInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicFcIfInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicFcIfInventoryByMoidRequest {
+	return ApiGetVnicFcIfInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcIfInventory
+func (a *VnicApiService) GetVnicFcIfInventoryByMoidExecute(r ApiGetVnicFcIfInventoryByMoidRequest) (VnicFcIfInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcIfInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcIfInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcIfInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcIfInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicFcIfInventoryListRequest) Filter(filter string) ApiGetVnicFcIfInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicFcIfInventoryListRequest) Orderby(orderby string) ApiGetVnicFcIfInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicFcIfInventoryListRequest) Top(top int32) ApiGetVnicFcIfInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicFcIfInventoryListRequest) Skip(skip int32) ApiGetVnicFcIfInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcIfInventoryListRequest) Select_(select_ string) ApiGetVnicFcIfInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcIfInventoryListRequest) Expand(expand string) ApiGetVnicFcIfInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicFcIfInventoryListRequest) Apply(apply string) ApiGetVnicFcIfInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicFcIfInventoryListRequest) Count(count bool) ApiGetVnicFcIfInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicFcIfInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicFcIfInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcIfInventoryListRequest) At(at string) ApiGetVnicFcIfInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicFcIfInventoryListRequest) Tags(tags string) ApiGetVnicFcIfInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicFcIfInventoryListRequest) Execute() (VnicFcIfInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcIfInventoryListExecute(r)
+}
+
+/*
+GetVnicFcIfInventoryList Read a 'vnic.FcIfInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicFcIfInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicFcIfInventoryList(ctx _context.Context) ApiGetVnicFcIfInventoryListRequest {
+	return ApiGetVnicFcIfInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcIfInventoryResponse
+func (a *VnicApiService) GetVnicFcIfInventoryListExecute(r ApiGetVnicFcIfInventoryListRequest) (VnicFcIfInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcIfInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcIfInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcIfInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicFcIfListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -6634,6 +9882,412 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetwo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcNetworkPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) Execute() (VnicFcNetworkPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcNetworkPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicFcNetworkPolicyInventoryByMoid Read a 'vnic.FcNetworkPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicFcNetworkPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicFcNetworkPolicyInventoryByMoidRequest {
+	return ApiGetVnicFcNetworkPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcNetworkPolicyInventory
+func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryByMoidExecute(r ApiGetVnicFcNetworkPolicyInventoryByMoidRequest) (VnicFcNetworkPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcNetworkPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcNetworkPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcNetworkPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Filter(filter string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Top(top int32) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Expand(expand string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Apply(apply string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Count(count bool) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) At(at string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Tags(tags string) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicFcNetworkPolicyInventoryListRequest) Execute() (VnicFcNetworkPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcNetworkPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicFcNetworkPolicyInventoryList Read a 'vnic.FcNetworkPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicFcNetworkPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryList(ctx _context.Context) ApiGetVnicFcNetworkPolicyInventoryListRequest {
+	return ApiGetVnicFcNetworkPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcNetworkPolicyInventoryResponse
+func (a *VnicApiService) GetVnicFcNetworkPolicyInventoryListExecute(r ApiGetVnicFcNetworkPolicyInventoryListRequest) (VnicFcNetworkPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcNetworkPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcNetworkPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7141,6 +10795,412 @@ func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicy
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicFcQosPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicFcQosPolicyInventoryByMoidRequest) Execute() (VnicFcQosPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcQosPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicFcQosPolicyInventoryByMoid Read a 'vnic.FcQosPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicFcQosPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicFcQosPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicFcQosPolicyInventoryByMoidRequest {
+	return ApiGetVnicFcQosPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcQosPolicyInventory
+func (a *VnicApiService) GetVnicFcQosPolicyInventoryByMoidExecute(r ApiGetVnicFcQosPolicyInventoryByMoidRequest) (VnicFcQosPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcQosPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcQosPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcQosPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Filter(filter string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Top(top int32) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Expand(expand string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Apply(apply string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Count(count bool) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) At(at string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Tags(tags string) ApiGetVnicFcQosPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicFcQosPolicyInventoryListRequest) Execute() (VnicFcQosPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcQosPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicFcQosPolicyInventoryList Read a 'vnic.FcQosPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicFcQosPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicFcQosPolicyInventoryList(ctx _context.Context) ApiGetVnicFcQosPolicyInventoryListRequest {
+	return ApiGetVnicFcQosPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcQosPolicyInventoryResponse
+func (a *VnicApiService) GetVnicFcQosPolicyInventoryListExecute(r ApiGetVnicFcQosPolicyInventoryListRequest) (VnicFcQosPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcQosPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcQosPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicFcQosPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -7397,6 +11457,818 @@ func (a *VnicApiService) GetVnicFcQosPolicyListExecute(r ApiGetVnicFcQosPolicyLi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicFcVethInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicFcVethInventoryByMoidRequest) Execute() (VnicFcVethInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcVethInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicFcVethInventoryByMoid Read a 'vnic.FcVethInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicFcVethInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicFcVethInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicFcVethInventoryByMoidRequest {
+	return ApiGetVnicFcVethInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcVethInventory
+func (a *VnicApiService) GetVnicFcVethInventoryByMoidExecute(r ApiGetVnicFcVethInventoryByMoidRequest) (VnicFcVethInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcVethInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcVethInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcVethInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcVethInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicFcVethInventoryListRequest) Filter(filter string) ApiGetVnicFcVethInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicFcVethInventoryListRequest) Orderby(orderby string) ApiGetVnicFcVethInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicFcVethInventoryListRequest) Top(top int32) ApiGetVnicFcVethInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicFcVethInventoryListRequest) Skip(skip int32) ApiGetVnicFcVethInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcVethInventoryListRequest) Select_(select_ string) ApiGetVnicFcVethInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcVethInventoryListRequest) Expand(expand string) ApiGetVnicFcVethInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicFcVethInventoryListRequest) Apply(apply string) ApiGetVnicFcVethInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicFcVethInventoryListRequest) Count(count bool) ApiGetVnicFcVethInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicFcVethInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicFcVethInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcVethInventoryListRequest) At(at string) ApiGetVnicFcVethInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicFcVethInventoryListRequest) Tags(tags string) ApiGetVnicFcVethInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicFcVethInventoryListRequest) Execute() (VnicFcVethInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcVethInventoryListExecute(r)
+}
+
+/*
+GetVnicFcVethInventoryList Read a 'vnic.FcVethInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicFcVethInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicFcVethInventoryList(ctx _context.Context) ApiGetVnicFcVethInventoryListRequest {
+	return ApiGetVnicFcVethInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcVethInventoryResponse
+func (a *VnicApiService) GetVnicFcVethInventoryListExecute(r ApiGetVnicFcVethInventoryListRequest) (VnicFcVethInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcVethInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcVethInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcVethInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcVhbaPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) Execute() (VnicFcVhbaPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcVhbaPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicFcVhbaPolicyInventoryByMoid Read a 'vnic.FcVhbaPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicFcVhbaPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicFcVhbaPolicyInventoryByMoidRequest {
+	return ApiGetVnicFcVhbaPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcVhbaPolicyInventory
+func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryByMoidExecute(r ApiGetVnicFcVhbaPolicyInventoryByMoidRequest) (VnicFcVhbaPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcVhbaPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcVhbaPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcVhbaPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicFcVhbaPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Filter(filter string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Top(top int32) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Expand(expand string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Apply(apply string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Count(count bool) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) At(at string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Tags(tags string) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicFcVhbaPolicyInventoryListRequest) Execute() (VnicFcVhbaPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicFcVhbaPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicFcVhbaPolicyInventoryList Read a 'vnic.FcVhbaPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicFcVhbaPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryList(ctx _context.Context) ApiGetVnicFcVhbaPolicyInventoryListRequest {
+	return ApiGetVnicFcVhbaPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicFcVhbaPolicyInventoryResponse
+func (a *VnicApiService) GetVnicFcVhbaPolicyInventoryListExecute(r ApiGetVnicFcVhbaPolicyInventoryListRequest) (VnicFcVhbaPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicFcVhbaPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcVhbaPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/FcVhbaPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicIscsiAdapterPolicyByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *VnicApiService
@@ -7446,6 +12318,412 @@ func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoidExecute(r ApiGetVnicIscs
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) Execute() (VnicIscsiAdapterPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiAdapterPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicIscsiAdapterPolicyInventoryByMoid Read a 'vnic.IscsiAdapterPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest {
+	return ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicIscsiAdapterPolicyInventory
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryByMoidExecute(r ApiGetVnicIscsiAdapterPolicyInventoryByMoidRequest) (VnicIscsiAdapterPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiAdapterPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiAdapterPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Filter(filter string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Top(top int32) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Expand(expand string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Apply(apply string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Count(count bool) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) At(at string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Tags(tags string) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) Execute() (VnicIscsiAdapterPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiAdapterPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicIscsiAdapterPolicyInventoryList Read a 'vnic.IscsiAdapterPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicIscsiAdapterPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryList(ctx _context.Context) ApiGetVnicIscsiAdapterPolicyInventoryListRequest {
+	return ApiGetVnicIscsiAdapterPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicIscsiAdapterPolicyInventoryResponse
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyInventoryListExecute(r ApiGetVnicIscsiAdapterPolicyInventoryListRequest) (VnicIscsiAdapterPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiAdapterPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7953,6 +13231,412 @@ func (a *VnicApiService) GetVnicIscsiBootPolicyByMoidExecute(r ApiGetVnicIscsiBo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicIscsiBootPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) Execute() (VnicIscsiBootPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiBootPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicIscsiBootPolicyInventoryByMoid Read a 'vnic.IscsiBootPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicIscsiBootPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicIscsiBootPolicyInventoryByMoidRequest {
+	return ApiGetVnicIscsiBootPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicIscsiBootPolicyInventory
+func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryByMoidExecute(r ApiGetVnicIscsiBootPolicyInventoryByMoidRequest) (VnicIscsiBootPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiBootPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiBootPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Filter(filter string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Top(top int32) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Expand(expand string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Apply(apply string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Count(count bool) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) At(at string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Tags(tags string) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicIscsiBootPolicyInventoryListRequest) Execute() (VnicIscsiBootPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiBootPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicIscsiBootPolicyInventoryList Read a 'vnic.IscsiBootPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicIscsiBootPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryList(ctx _context.Context) ApiGetVnicIscsiBootPolicyInventoryListRequest {
+	return ApiGetVnicIscsiBootPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicIscsiBootPolicyInventoryResponse
+func (a *VnicApiService) GetVnicIscsiBootPolicyInventoryListExecute(r ApiGetVnicIscsiBootPolicyInventoryListRequest) (VnicIscsiBootPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiBootPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicIscsiBootPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -8359,6 +14043,412 @@ func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoidExecute(r ApiGetVni
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) Execute() (VnicIscsiStaticTargetPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiStaticTargetPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicIscsiStaticTargetPolicyInventoryByMoid Read a 'vnic.IscsiStaticTargetPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest {
+	return ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicIscsiStaticTargetPolicyInventory
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryByMoidExecute(r ApiGetVnicIscsiStaticTargetPolicyInventoryByMoidRequest) (VnicIscsiStaticTargetPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiStaticTargetPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Filter(filter string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Top(top int32) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Expand(expand string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Apply(apply string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Count(count bool) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) At(at string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Tags(tags string) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) Execute() (VnicIscsiStaticTargetPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiStaticTargetPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicIscsiStaticTargetPolicyInventoryList Read a 'vnic.IscsiStaticTargetPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryList(ctx _context.Context) ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest {
+	return ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicIscsiStaticTargetPolicyInventoryResponse
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyInventoryListExecute(r ApiGetVnicIscsiStaticTargetPolicyInventoryListRequest) (VnicIscsiStaticTargetPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiStaticTargetPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVnicIscsiStaticTargetPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *VnicApiService
@@ -8664,6 +14754,412 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicL
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) Execute() (VnicLanConnectivityPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicLanConnectivityPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicLanConnectivityPolicyInventoryByMoid Read a 'vnic.LanConnectivityPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest {
+	return ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicLanConnectivityPolicyInventory
+func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryByMoidExecute(r ApiGetVnicLanConnectivityPolicyInventoryByMoidRequest) (VnicLanConnectivityPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicLanConnectivityPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicLanConnectivityPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicLanConnectivityPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Filter(filter string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Top(top int32) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Expand(expand string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Apply(apply string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Count(count bool) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) At(at string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Tags(tags string) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicLanConnectivityPolicyInventoryListRequest) Execute() (VnicLanConnectivityPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicLanConnectivityPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicLanConnectivityPolicyInventoryList Read a 'vnic.LanConnectivityPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicLanConnectivityPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryList(ctx _context.Context) ApiGetVnicLanConnectivityPolicyInventoryListRequest {
+	return ApiGetVnicLanConnectivityPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicLanConnectivityPolicyInventoryResponse
+func (a *VnicApiService) GetVnicLanConnectivityPolicyInventoryListExecute(r ApiGetVnicLanConnectivityPolicyInventoryListRequest) (VnicLanConnectivityPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicLanConnectivityPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicLanConnectivityPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9476,6 +15972,412 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) Execute() (VnicSanConnectivityPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicSanConnectivityPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetVnicSanConnectivityPolicyInventoryByMoid Read a 'vnic.SanConnectivityPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest
+*/
+func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest {
+	return ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return VnicSanConnectivityPolicyInventory
+func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryByMoidExecute(r ApiGetVnicSanConnectivityPolicyInventoryByMoidRequest) (VnicSanConnectivityPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicSanConnectivityPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicSanConnectivityPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicSanConnectivityPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Filter(filter string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Orderby(orderby string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Top(top int32) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Skip(skip int32) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Select_(select_ string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Expand(expand string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Apply(apply string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Count(count bool) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) At(at string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Tags(tags string) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicSanConnectivityPolicyInventoryListRequest) Execute() (VnicSanConnectivityPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicSanConnectivityPolicyInventoryListExecute(r)
+}
+
+/*
+GetVnicSanConnectivityPolicyInventoryList Read a 'vnic.SanConnectivityPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetVnicSanConnectivityPolicyInventoryListRequest
+*/
+func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryList(ctx _context.Context) ApiGetVnicSanConnectivityPolicyInventoryListRequest {
+	return ApiGetVnicSanConnectivityPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return VnicSanConnectivityPolicyInventoryResponse
+func (a *VnicApiService) GetVnicSanConnectivityPolicyInventoryListExecute(r ApiGetVnicSanConnectivityPolicyInventoryListRequest) (VnicSanConnectivityPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicSanConnectivityPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicSanConnectivityPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

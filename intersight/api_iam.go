@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -1012,6 +1012,184 @@ func (a *IamApiService) CreateIamCertificateRequestExecute(r ApiCreateIamCertifi
 	}
 	// body params
 	localVarPostBody = r.iamCertificateRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateIamDomainNameInfoRequest struct {
+	ctx               _context.Context
+	ApiService        *IamApiService
+	iamDomainNameInfo *IamDomainNameInfo
+	ifMatch           *string
+	ifNoneMatch       *string
+}
+
+// The &#39;iam.DomainNameInfo&#39; resource to create.
+func (r ApiCreateIamDomainNameInfoRequest) IamDomainNameInfo(iamDomainNameInfo IamDomainNameInfo) ApiCreateIamDomainNameInfoRequest {
+	r.iamDomainNameInfo = &iamDomainNameInfo
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiCreateIamDomainNameInfoRequest) IfMatch(ifMatch string) ApiCreateIamDomainNameInfoRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte.
+func (r ApiCreateIamDomainNameInfoRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIamDomainNameInfoRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateIamDomainNameInfoRequest) Execute() (IamDomainNameInfo, *_nethttp.Response, error) {
+	return r.ApiService.CreateIamDomainNameInfoExecute(r)
+}
+
+/*
+CreateIamDomainNameInfo Create a 'iam.DomainNameInfo' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateIamDomainNameInfoRequest
+*/
+func (a *IamApiService) CreateIamDomainNameInfo(ctx _context.Context) ApiCreateIamDomainNameInfoRequest {
+	return ApiCreateIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) CreateIamDomainNameInfoExecute(r ApiCreateIamDomainNameInfoRequest) (IamDomainNameInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.CreateIamDomainNameInfo")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.iamDomainNameInfo == nil {
+		return localVarReturnValue, nil, reportError("iamDomainNameInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamDomainNameInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -4719,6 +4897,145 @@ func (a *IamApiService) DeleteIamCertificateRequestExecute(r ApiDeleteIamCertifi
 	}
 
 	localVarPath := localBasePath + "/api/v1/iam/CertificateRequests/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteIamDomainNameInfoRequest struct {
+	ctx        _context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiDeleteIamDomainNameInfoRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteIamDomainNameInfoExecute(r)
+}
+
+/*
+DeleteIamDomainNameInfo Delete a 'iam.DomainNameInfo' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiDeleteIamDomainNameInfoRequest
+*/
+func (a *IamApiService) DeleteIamDomainNameInfo(ctx _context.Context, moid string) ApiDeleteIamDomainNameInfoRequest {
+	return ApiDeleteIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+func (a *IamApiService) DeleteIamDomainNameInfoExecute(r ApiDeleteIamDomainNameInfoRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.DeleteIamDomainNameInfo")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -10567,6 +10884,412 @@ func (a *IamApiService) GetIamDomainGroupListExecute(r ApiGetIamDomainGroupListR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetIamDomainNameInfoByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamDomainNameInfoByMoidRequest) Execute() (IamDomainNameInfo, *_nethttp.Response, error) {
+	return r.ApiService.GetIamDomainNameInfoByMoidExecute(r)
+}
+
+/*
+GetIamDomainNameInfoByMoid Read a 'iam.DomainNameInfo' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamDomainNameInfoByMoidRequest
+*/
+func (a *IamApiService) GetIamDomainNameInfoByMoid(ctx _context.Context, moid string) ApiGetIamDomainNameInfoByMoidRequest {
+	return ApiGetIamDomainNameInfoByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) GetIamDomainNameInfoByMoidExecute(r ApiGetIamDomainNameInfoByMoidRequest) (IamDomainNameInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamDomainNameInfoByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamDomainNameInfoListRequest struct {
+	ctx         _context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamDomainNameInfoListRequest) Filter(filter string) ApiGetIamDomainNameInfoListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamDomainNameInfoListRequest) Orderby(orderby string) ApiGetIamDomainNameInfoListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamDomainNameInfoListRequest) Top(top int32) ApiGetIamDomainNameInfoListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamDomainNameInfoListRequest) Skip(skip int32) ApiGetIamDomainNameInfoListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamDomainNameInfoListRequest) Select_(select_ string) ApiGetIamDomainNameInfoListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamDomainNameInfoListRequest) Expand(expand string) ApiGetIamDomainNameInfoListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamDomainNameInfoListRequest) Apply(apply string) ApiGetIamDomainNameInfoListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamDomainNameInfoListRequest) Count(count bool) ApiGetIamDomainNameInfoListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamDomainNameInfoListRequest) Inlinecount(inlinecount string) ApiGetIamDomainNameInfoListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamDomainNameInfoListRequest) At(at string) ApiGetIamDomainNameInfoListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamDomainNameInfoListRequest) Tags(tags string) ApiGetIamDomainNameInfoListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamDomainNameInfoListRequest) Execute() (IamDomainNameInfoResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetIamDomainNameInfoListExecute(r)
+}
+
+/*
+GetIamDomainNameInfoList Read a 'iam.DomainNameInfo' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamDomainNameInfoListRequest
+*/
+func (a *IamApiService) GetIamDomainNameInfoList(ctx _context.Context) ApiGetIamDomainNameInfoListRequest {
+	return ApiGetIamDomainNameInfoListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfoResponse
+func (a *IamApiService) GetIamDomainNameInfoListExecute(r ApiGetIamDomainNameInfoListRequest) (IamDomainNameInfoResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamDomainNameInfoResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamDomainNameInfoList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetIamEndPointPrivilegeByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *IamApiService
@@ -11529,6 +12252,412 @@ func (a *IamApiService) GetIamEndPointUserByMoidExecute(r ApiGetIamEndPointUserB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetIamEndPointUserInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointUserInventoryByMoidRequest) Execute() (IamEndPointUserInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetIamEndPointUserInventoryByMoidExecute(r)
+}
+
+/*
+GetIamEndPointUserInventoryByMoid Read a 'iam.EndPointUserInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointUserInventoryByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointUserInventoryByMoid(ctx _context.Context, moid string) ApiGetIamEndPointUserInventoryByMoidRequest {
+	return ApiGetIamEndPointUserInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserInventory
+func (a *IamApiService) GetIamEndPointUserInventoryByMoidExecute(r ApiGetIamEndPointUserInventoryByMoidRequest) (IamEndPointUserInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamEndPointUserInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamEndPointUserInventoryListRequest) Filter(filter string) ApiGetIamEndPointUserInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamEndPointUserInventoryListRequest) Orderby(orderby string) ApiGetIamEndPointUserInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamEndPointUserInventoryListRequest) Top(top int32) ApiGetIamEndPointUserInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamEndPointUserInventoryListRequest) Skip(skip int32) ApiGetIamEndPointUserInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamEndPointUserInventoryListRequest) Select_(select_ string) ApiGetIamEndPointUserInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamEndPointUserInventoryListRequest) Expand(expand string) ApiGetIamEndPointUserInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamEndPointUserInventoryListRequest) Apply(apply string) ApiGetIamEndPointUserInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamEndPointUserInventoryListRequest) Count(count bool) ApiGetIamEndPointUserInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamEndPointUserInventoryListRequest) Inlinecount(inlinecount string) ApiGetIamEndPointUserInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamEndPointUserInventoryListRequest) At(at string) ApiGetIamEndPointUserInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamEndPointUserInventoryListRequest) Tags(tags string) ApiGetIamEndPointUserInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamEndPointUserInventoryListRequest) Execute() (IamEndPointUserInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetIamEndPointUserInventoryListExecute(r)
+}
+
+/*
+GetIamEndPointUserInventoryList Read a 'iam.EndPointUserInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamEndPointUserInventoryListRequest
+*/
+func (a *IamApiService) GetIamEndPointUserInventoryList(ctx _context.Context) ApiGetIamEndPointUserInventoryListRequest {
+	return ApiGetIamEndPointUserInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserInventoryResponse
+func (a *IamApiService) GetIamEndPointUserInventoryListExecute(r ApiGetIamEndPointUserInventoryListRequest) (IamEndPointUserInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamEndPointUserInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetIamEndPointUserListRequest struct {
 	ctx         _context.Context
 	ApiService  *IamApiService
@@ -11935,6 +13064,412 @@ func (a *IamApiService) GetIamEndPointUserPolicyByMoidExecute(r ApiGetIamEndPoin
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetIamEndPointUserPolicyInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointUserPolicyInventoryByMoidRequest) Execute() (IamEndPointUserPolicyInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetIamEndPointUserPolicyInventoryByMoidExecute(r)
+}
+
+/*
+GetIamEndPointUserPolicyInventoryByMoid Read a 'iam.EndPointUserPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointUserPolicyInventoryByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoid(ctx _context.Context, moid string) ApiGetIamEndPointUserPolicyInventoryByMoidRequest {
+	return ApiGetIamEndPointUserPolicyInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserPolicyInventory
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryByMoidExecute(r ApiGetIamEndPointUserPolicyInventoryByMoidRequest) (IamEndPointUserPolicyInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamEndPointUserPolicyInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserPolicyInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicyInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserPolicyInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Filter(filter string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Orderby(orderby string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Top(top int32) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Skip(skip int32) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Select_(select_ string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Expand(expand string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Apply(apply string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Count(count bool) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Inlinecount(inlinecount string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) At(at string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Tags(tags string) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamEndPointUserPolicyInventoryListRequest) Execute() (IamEndPointUserPolicyInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetIamEndPointUserPolicyInventoryListExecute(r)
+}
+
+/*
+GetIamEndPointUserPolicyInventoryList Read a 'iam.EndPointUserPolicyInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamEndPointUserPolicyInventoryListRequest
+*/
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryList(ctx _context.Context) ApiGetIamEndPointUserPolicyInventoryListRequest {
+	return ApiGetIamEndPointUserPolicyInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserPolicyInventoryResponse
+func (a *IamApiService) GetIamEndPointUserPolicyInventoryListExecute(r ApiGetIamEndPointUserPolicyInventoryListRequest) (IamEndPointUserPolicyInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamEndPointUserPolicyInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserPolicyInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserPolicyInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetIamEndPointUserPolicyListRequest struct {
 	ctx         _context.Context
 	ApiService  *IamApiService
@@ -12240,6 +13775,412 @@ func (a *IamApiService) GetIamEndPointUserRoleByMoidExecute(r ApiGetIamEndPointU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserRoleInventoryByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *IamApiService
+	moid       string
+}
+
+func (r ApiGetIamEndPointUserRoleInventoryByMoidRequest) Execute() (IamEndPointUserRoleInventory, *_nethttp.Response, error) {
+	return r.ApiService.GetIamEndPointUserRoleInventoryByMoidExecute(r)
+}
+
+/*
+GetIamEndPointUserRoleInventoryByMoid Read a 'iam.EndPointUserRoleInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIamEndPointUserRoleInventoryByMoidRequest
+*/
+func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoid(ctx _context.Context, moid string) ApiGetIamEndPointUserRoleInventoryByMoidRequest {
+	return ApiGetIamEndPointUserRoleInventoryByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserRoleInventory
+func (a *IamApiService) GetIamEndPointUserRoleInventoryByMoidExecute(r ApiGetIamEndPointUserRoleInventoryByMoidRequest) (IamEndPointUserRoleInventory, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamEndPointUserRoleInventory
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserRoleInventoryByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoleInventories/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIamEndPointUserRoleInventoryListRequest struct {
+	ctx         _context.Context
+	ApiService  *IamApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Filter(filter string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Orderby(orderby string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Top(top int32) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Skip(skip int32) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Select_(select_ string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Expand(expand string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Apply(apply string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Count(count bool) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Inlinecount(inlinecount string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) At(at string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Tags(tags string) ApiGetIamEndPointUserRoleInventoryListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIamEndPointUserRoleInventoryListRequest) Execute() (IamEndPointUserRoleInventoryResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetIamEndPointUserRoleInventoryListExecute(r)
+}
+
+/*
+GetIamEndPointUserRoleInventoryList Read a 'iam.EndPointUserRoleInventory' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIamEndPointUserRoleInventoryListRequest
+*/
+func (a *IamApiService) GetIamEndPointUserRoleInventoryList(ctx _context.Context) ApiGetIamEndPointUserRoleInventoryListRequest {
+	return ApiGetIamEndPointUserRoleInventoryListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IamEndPointUserRoleInventoryResponse
+func (a *IamApiService) GetIamEndPointUserRoleInventoryListExecute(r ApiGetIamEndPointUserRoleInventoryListRequest) (IamEndPointUserRoleInventoryResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamEndPointUserRoleInventoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.GetIamEndPointUserRoleInventoryList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/EndPointUserRoleInventories"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -24763,6 +26704,178 @@ func (a *IamApiService) PatchIamCertificateRequestExecute(r ApiPatchIamCertifica
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchIamDomainNameInfoRequest struct {
+	ctx               _context.Context
+	ApiService        *IamApiService
+	moid              string
+	iamDomainNameInfo *IamDomainNameInfo
+	ifMatch           *string
+}
+
+// The &#39;iam.DomainNameInfo&#39; resource to update.
+func (r ApiPatchIamDomainNameInfoRequest) IamDomainNameInfo(iamDomainNameInfo IamDomainNameInfo) ApiPatchIamDomainNameInfoRequest {
+	r.iamDomainNameInfo = &iamDomainNameInfo
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiPatchIamDomainNameInfoRequest) IfMatch(ifMatch string) ApiPatchIamDomainNameInfoRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchIamDomainNameInfoRequest) Execute() (IamDomainNameInfo, *_nethttp.Response, error) {
+	return r.ApiService.PatchIamDomainNameInfoExecute(r)
+}
+
+/*
+PatchIamDomainNameInfo Update a 'iam.DomainNameInfo' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiPatchIamDomainNameInfoRequest
+*/
+func (a *IamApiService) PatchIamDomainNameInfo(ctx _context.Context, moid string) ApiPatchIamDomainNameInfoRequest {
+	return ApiPatchIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) PatchIamDomainNameInfoExecute(r ApiPatchIamDomainNameInfoRequest) (IamDomainNameInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.PatchIamDomainNameInfo")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.iamDomainNameInfo == nil {
+		return localVarReturnValue, nil, reportError("iamDomainNameInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamDomainNameInfo
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchIamEndPointUserRequest struct {
 	ctx             _context.Context
 	ApiService      *IamApiService
@@ -29323,6 +31436,178 @@ func (a *IamApiService) UpdateIamCertificateRequestExecute(r ApiUpdateIamCertifi
 	}
 	// body params
 	localVarPostBody = r.iamCertificateRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateIamDomainNameInfoRequest struct {
+	ctx               _context.Context
+	ApiService        *IamApiService
+	moid              string
+	iamDomainNameInfo *IamDomainNameInfo
+	ifMatch           *string
+}
+
+// The &#39;iam.DomainNameInfo&#39; resource to update.
+func (r ApiUpdateIamDomainNameInfoRequest) IamDomainNameInfo(iamDomainNameInfo IamDomainNameInfo) ApiUpdateIamDomainNameInfoRequest {
+	r.iamDomainNameInfo = &iamDomainNameInfo
+	return r
+}
+
+// For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request.
+func (r ApiUpdateIamDomainNameInfoRequest) IfMatch(ifMatch string) ApiUpdateIamDomainNameInfoRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateIamDomainNameInfoRequest) Execute() (IamDomainNameInfo, *_nethttp.Response, error) {
+	return r.ApiService.UpdateIamDomainNameInfoExecute(r)
+}
+
+/*
+UpdateIamDomainNameInfo Update a 'iam.DomainNameInfo' resource.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiUpdateIamDomainNameInfoRequest
+*/
+func (a *IamApiService) UpdateIamDomainNameInfo(ctx _context.Context, moid string) ApiUpdateIamDomainNameInfoRequest {
+	return ApiUpdateIamDomainNameInfoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IamDomainNameInfo
+func (a *IamApiService) UpdateIamDomainNameInfoExecute(r ApiUpdateIamDomainNameInfoRequest) (IamDomainNameInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  IamDomainNameInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IamApiService.UpdateIamDomainNameInfo")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iam/DomainNameInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.iamDomainNameInfo == nil {
+		return localVarReturnValue, nil, reportError("iamDomainNameInfo is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.iamDomainNameInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
