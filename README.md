@@ -1,10 +1,12 @@
+# Deprecation Notice
+
+This repository is no longer updated (manually or automatically)! Please use the supported [Intersight Go](https://github.com/ciscodevnet/intersight-go) SDK in the Cisco DevNet repository.
+
 # (Unofficial) Intersight Go SDK
 
 This is a Go module that contains the Intersight SDK. 
 
 This module is generated automatically (using the [OpenAPITools OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)) from the [Intersight OpenAPI specification](https://intersight.com/apidocs/downloads/) and updated automatically whenever there is a new version of the specification available. 
-
-The canonical version of the SDK code is [here](https://github.com/CiscoDevNet/terraform-provider-intersight/tree/master/intersight_gosdk) but that version is not able to be imported directly. 
 
 # Usage
 
